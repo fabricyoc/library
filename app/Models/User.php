@@ -51,4 +51,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Endereco::class);
     }
+
+    public function livros()
+    {
+        return $this->belongsToMany(Livro::class);
+    }
 }

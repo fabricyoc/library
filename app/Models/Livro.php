@@ -21,4 +21,9 @@ class Livro extends Model
         'genero',
         'nacionalidade',
     ];
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

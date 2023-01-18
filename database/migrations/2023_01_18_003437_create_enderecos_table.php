@@ -19,7 +19,8 @@ return new class extends Migration
             $table->foreignId('user_id')
                 ->constrained()
                 ->onDelete('CASCADE')
-                ->onUpdate('CASCADE');
+                ->onUpdate('CASCADE')
+                ->nullable();
             $table->string('logradouro')->nullable();
             $table->string('numero')->nullable();
             $table->string('bairro')->nullable();

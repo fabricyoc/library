@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Endereco;
+use App\Models\Livro;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class EnderecoSeeder extends Seeder
+class LivroSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,7 +15,6 @@ class EnderecoSeeder extends Seeder
      */
     public function run()
     {
-        // Gerando menos endereços para não ter 2 usuários com o mesmo endereço
-        Endereco::factory(5)->create();
+        Livro::factory(5)->create();
     }
 }

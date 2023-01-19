@@ -10,9 +10,13 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all();
-        dd($users->load('livros')->load('endereco')->toArray());
+        // dd($users->load('livros')->load('endereco')->toArray());
         // return $users[0]->endereco->numero;
+
+        $users = User::all();
+        return view('users.index', [
+            'users' => $users
+        ]);
     }
 
     public function create()

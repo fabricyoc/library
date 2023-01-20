@@ -8,6 +8,10 @@
         <title>Biblioteca</title>
     </head>
     <body>
+        @include('_layouts.header')
+
         @yield('content')
+
+        @include('_layouts.footer')
     </body>
 </html>

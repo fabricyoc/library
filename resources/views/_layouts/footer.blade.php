@@ -1,5 +1,6 @@
+<div class="bottom-0 fixed w-full">
     <hr class="h-0.5 bg-cyan-100">
-    <div class="text-sm flex flex-nowrap justify-between space-x-6 w-full h-44 p-5">
+    <div class="text-sm flex flex-nowrap justify-between space-x-6 h-44 p-5">
 
         {{-- Logo da Escola com Endereço --}}
         <div class="flex space-x-2">
@@ -83,3 +84,5 @@
             </ul>
         </div>
     </div>
+
+</div>

@@ -13,9 +13,13 @@ class UserController extends Controller
         // dd($users->load('livros')->load('endereco')->toArray());
         // return $users[0]->endereco->numero;
 
-        $users = User::all();
+        $funcionarios = User::where('type', '=', 'admin')->get();
+        $estudantes = User::where('type', '=', 'common')->get();
+
+        dd($funcionarios->load('livros')->load('endereco')->toArray());
+
         return view('users.index', [
-            'users' => $users
+            // 'users' => $users
         ]);
     }
 

@@ -1,10 +1,12 @@
 <!--Header Section Starts Here-->
 <header class="bg-nav">
     <div class="flex justify-between">
-        <div class="p-1 mx-3 inline-flex items-center">
-            {{-- <i class="fas fa-bars pr-2 text-white" onclick="sidebarToggle()"></i> --}}
+        <div class="p-1 mx-3 inline-flex items-center w-20">
             <i id="btnSidebar" class="fas fa-bars pr-2 text-white" onclick="sidebarToggle()"></i>
-            <h1 class="text-white p-2">Logo</h1>
+            <a href="{{ route('dashboard.index') }}">
+                <h1 class="text-white p-2">Logo</h1>
+                {{-- <img src="{{ Storage::url('imgs/logo.jpg') }}" alt=""> --}}
+            </a>
         </div>
         <div class="p-1 flex flex-row items-center">
             {{-- <a href="https://github.com/tailwindadmin/admin" class="text-white p-2 mr-2 no-underline hidden md:block lg:block">Github</a> --}}

@@ -53,7 +53,6 @@ btnProfileDropdown.addEventListener('click', profileToggle);
 /**
  * ### Modals ###
  */
-
 function toggleModal(action, elem_trigger) {
   elem_trigger.addEventListener('click', function () {
     if (action == 'add') {

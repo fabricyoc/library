@@ -16,6 +16,8 @@ class UserController extends Controller
         $funcionarios = User::where('type', '=', 'admin')->get();
         $estudantes = User::where('type', '=', 'common')->get();
 
+        // dd($funcionarios[0]->endereco->toArray());
+
         dd($funcionarios->load('livros')->load('endereco')->toArray());
 
         return view('users.index', [

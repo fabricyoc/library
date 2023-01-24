@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserStoreUpdateRequest;
+use App\Models\Endereco;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class EstudanteController extends Controller
 {
@@ -22,9 +24,21 @@ class EstudanteController extends Controller
         // Create no index através do modal
     }
 
-    public function store(UserStoreUpdateRequest $request)
+    public function store(User $user, Endereco $endereco, UserStoreUpdateRequest $request)
     {
-        dd($request->toArray());
+        $cpfRegex = preg_replace('/[^0-9]/', '', $request->cpf); // apenas números
+
+        $request['password'] = bcrypt($cpfRegex);
+        $user->fill($request->except(['logradouro', 'numero', 'bairro', 'referencia']));
+        $user->save();
+
+        $request['cidade'] = "Caicó";
+        $request['cep'] = "59300-000";
+        $endereco->fill($request->except(['name', 'cpf', 'email', 'telephone']));
+        $user->endereco()->save($endereco);
+
+
+        return Redirect::route('estudantes.index');
     }
 
     public function show(User $user)

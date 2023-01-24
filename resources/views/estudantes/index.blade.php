@@ -45,9 +45,24 @@
                 </thead>
                 <tbody>
                     @if ($estudantes->count() > 0)
-                        @foreach ($estudantes as $e)
+                    @foreach ($estudantes as $e)
                             <tr>
-                                <td class="border px-4 py-2">Foto</td>
+                                <td class="border px-4 py-2">
+                                    <img
+                                        src="
+                                            @if (str_contains($e->photo, 'perfil/'))
+                                                {{Storage::url($e->photo)}}
+                                                @else
+                                                {{-- Abaixo pega as imagens do fake (server quebrado) --}}
+                                                {{-- {{$e->photo}} --}}
+
+                                                {{-- Abaixo pega a imagem sem-foto.png --}}
+                                                {{Storage::url('imgs/sem-foto.png')}}
+                                            @endif"
+                                        alt="Sem foto"
+                                    >
+
+                                </td>
                                 <td class="border px-4 py-2">{{$e->name}}</td>
                                 <td class="border px-4 py-2">{{$e->email}}</td>
                                 <td class="border px-4 py-2">{{$e->telephone}}</td>

@@ -1,5 +1,5 @@
 <!-- Centered With a Form Modal -->
-<div id='centeredFormModal' class="modal-wrapper">
+<div id='centeredFormModal' class="modal-wrapper @if ($errors->any()) modal-is-open @endif">
     <div class="overlay close-modal"></div>
     <div class="modal modal-centered">
         <div class="modal-content shadow-lg p-5">
@@ -21,17 +21,38 @@
                             Nome
                         </label>
                         <input
-                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white-500"
+                            class="appearance-none block w-full bg-gray-200 text-grey-darker border rounded py-3 px-3 leading-tight focus:outline-none focus:bg-white-500 focus:border-gray-600
+                                @if ($errors->has('name'))
+                                    border-red-500
+                                @else
+                                    border-gray-200
+                                @endif"
                             id="name" name="name" type="text" placeholder="Nome do estudante">
-                        <p class="text-red-500 text-xs italic">Please fill out this field.</p>
+
+                            @error('name')
+                                <p class="text-red-500 text-xs italic">
+                                    {{$message}}
+                                </p>
+                            @enderror
+
                     </div>
                     <div class="w-full md:w-1/3 px-3">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-light mb-1" for="cpf">
                             CPF
                         </label>
                         <input
-                            class="appearance-none block w-full bg-gray-200 text-grey-darker border border-gray-200 rounded py-3 px-3 leading-tight focus:outline-none focus:bg-white-500 focus:border-gray-600"
-                            id="cpf" name="cpf" type="text" placeholder="123.456.789-77">
+                            class="appearance-none block w-full bg-gray-200 text-grey-darker border rounded py-3 px-3 leading-tight focus:outline-none focus:bg-white-500 focus:border-gray-600
+                            @if ($errors->has('cpf'))
+                                border-red-500
+                            @else
+                                border-gray-200
+                            @endif"
+                            id="cpf" name="cpf" type="text" placeholder="123.456.789-77" maxlength="14" minlength="14">
+                        @error('cpf')
+                            <p class="text-red-500 text-xs italic">
+                                {{$message}}
+                            </p>
+                        @enderror
                     </div>
                 </div>
 
@@ -42,16 +63,36 @@
                             E-mail
                         </label>
                         <input
-                            class="appearance-none block w-full bg-gray-200 text-grey-darker border border-gray-200 rounded py-3 px-2 leading-tight focus:outline-none focus:bg-white-500 focus:border-gray-600"
+                            class="appearance-none block w-full bg-gray-200 text-grey-darker border rounded py-3 px-2 leading-tight focus:outline-none focus:bg-white-500 focus:border-gray-600
+                                @if ($errors->has('email'))
+                                    border-red-500
+                                @else
+                                    border-gray-200
+                                @endif"
                             id="email" name="email" type="text" placeholder="estudante@eeccam.com">
+                        @error('email')
+                            <p class="text-red-500 text-xs italic">
+                                {{$message}}
+                            </p>
+                        @enderror
                     </div>
                     <div class="w-full md:w-1/3 px-3">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-light mb-1" for="telephone">
                             Telefone
                         </label>
                         <input
-                            class="appearance-none block w-full bg-gray-200 text-grey-darker border border-gray-200 rounded py-3 px-2 leading-tight focus:outline-none focus:bg-white-500 focus:border-gray-600"
-                            id="telephone" name="telephone" type="text" placeholder="(00)9.1111-2222">
+                            class="appearance-none block w-full bg-gray-200 text-grey-darker border rounded py-3 px-2 leading-tight focus:outline-none focus:bg-white-500 focus:border-gray-600
+                            @if ($errors->has('telephone'))
+                                border-red-500
+                            @else
+                                border-gray-200
+                            @endif"
+                            id="telephone" name="telephone" type="text" placeholder="(00)9.1111-2222" maxlength="14" minlength="14">
+                        @error('telephone')
+                            <p class="text-red-500 text-xs italic">
+                                {{$message}}
+                            </p>
+                        @enderror
                     </div>
                 </div>
 
@@ -71,7 +112,7 @@
                         </label>
                         <input
                             class="appearance-none block w-full bg-gray-200 text-grey-darker border border-gray-200 rounded py-3 px-3 leading-tight focus:outline-none focus:bg-white-500 focus:border-gray-600"
-                            id="numero" name="numero" type="text" placeholder="Nº da residência">
+                            id="numero" name="numero" type="text" placeholder="Nº da residência" maxlength="6">
                     </div>
                 </div>
 

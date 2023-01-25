@@ -79,6 +79,38 @@ if (document.querySelector('.modal-wrapper')) {
   });
 }
 
+// INÍCIO :: CPF COM MÁSCARA
+var inputCpf = document.querySelector('#cpf');
+inputCpf.addEventListener("keyup", formatarCPF);
+function formatarCPF(e) {
+  var v = e.target.value.replace(/\D/g, "");
+  v = v.replace(/(\d{3})(\d)/, "$1.$2");
+  v = v.replace(/(\d{3})(\d)/, "$1.$2");
+  v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+  e.target.value = v;
+}
+// FIM :: CPF COM MÁSCARA
+
+// INÍCIO :: Telefone COM MÁSCARA
+var inputTelephone = document.querySelector('#telephone');
+inputTelephone.addEventListener("keyup", formatarTelefone);
+function formatarTelefone(e) {
+  var v = e.target.value.replace(/\D/g, "");
+  v = v.replace(/^(\d\d)(\d)/g, "($1)$2");
+  v = v.replace(/(\d{5})(\d)/, "$1-$2");
+  e.target.value = v;
+}
+// FIM :: Telefone COM MÁSCARA
+
+// INÍCIO :: CAMPO APENAS COM NÚMEROS
+var inputNumeroResidencia = document.querySelector('#numero');
+inputNumeroResidencia.addEventListener("keypress", somenteNumeros);
+function somenteNumeros(e) {
+  var charCode = e.which ? e.which : e.keyCode;
+  if (charCode > 31 && (charCode < 48 || charCode > 57)) e.preventDefault();
+}
+// FIM :: CAMPO APENAS COM NÚMEROS
+
 /***/ }),
 
 /***/ "./resources/css/all.css":

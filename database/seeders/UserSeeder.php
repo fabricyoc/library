@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
             'name' => 'Fabricyo Costa',
             'birthDate' => '1995-10-03',
             'email' => 'fabricyoc@gmail.com',
-            'telephone' => '(84)9.9701-4812',
+            'telephone' => '(84)99701-4812',
             'photo' => 'link para foto',
             'cpf' => '111.333.444-88',
             'type' => 'admin',

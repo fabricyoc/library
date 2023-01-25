@@ -27,7 +27,7 @@ class UserStoreRequest extends FormRequest
         return [
             'name' => 'required|string',
             'cpf' => 'required|string|min:14|max:14',
-            'email' => 'required|email|unique',
+            'email' => 'required|string|email|unique:users',
             'telephone' => 'required|string|min:14|max:14',
             'logradouro' => 'nullable|string',
             'numero' => 'nullable|string|max:6',
@@ -39,10 +39,15 @@ class UserStoreRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'O campo NOME é obrigatório.',
-            'cpf.required' => 'O campo CPF é obrigatório.',
-            'email.required' => 'O campo E-MAIL é obrigatório.',
-            'telephone.required' => 'O campo TELEFONE é obrigatório.',
+            // 'name.required' => 'O campo NOME é obrigatório.',
+            // 'cpf.required' => 'O campo CPF é obrigatório.',
+            // 'cpf.min' => 'No mínimo 11 dígitos.',
+            // 'cpf.max' => 'No máximo 11 dígitos.',
+            // 'email.required' => 'O campo E-MAIL é obrigatório.',
+            // 'telephone.required' => 'O campo TELEFONE é obrigatório.',
+            // 'numero.max' => 'O número residencial deve ter até 6 dígitos.'
+            'required' => 'Este campo é obrigatório',
+            'email.unique' => 'Por favor, tente outro e-mail',
         ];
     }
 }

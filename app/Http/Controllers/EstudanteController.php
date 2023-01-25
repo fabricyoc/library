@@ -46,8 +46,6 @@ class EstudanteController extends Controller
         {
             return redirect()->back();
         }
-
-
     }
 
     public function show(User $user)
@@ -68,5 +66,10 @@ class EstudanteController extends Controller
     public function destroy(User $user)
     {
         //
+    }
+
+    private function telephoneUnique($telephone)
+    {
+        // $telUnique = (count(User::where('telephone', '=', $request->telephone)->get()) > 0) ? false : true ;
     }
 }

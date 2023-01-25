@@ -16,7 +16,7 @@
                 @csrf
                 {{-- Linha 1 --}}
                 <div class="flex flex-wrap -mx-3 mb-2">
-                    <div class="w-full md:w-2/3 px-3 mb-6 md:mb-0">
+                    <div class="w-full md:w-2/3 px-3 mb-2 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-light mb-1" for="name">
                             Nome
                         </label>
@@ -27,7 +27,7 @@
                                 @else
                                     border-gray-200
                                 @endif"
-                            id="name" name="name" type="text" placeholder="Nome do estudante">
+                            id="name" name="name" type="text" placeholder="Nome do estudante" value="{{old('name')}}">
 
                             @error('name')
                                 <p class="text-red-500 text-xs italic">
@@ -47,7 +47,7 @@
                             @else
                                 border-gray-200
                             @endif"
-                            id="cpf" name="cpf" type="text" placeholder="123.456.789-77" maxlength="14" minlength="14">
+                            id="cpf" name="cpf" type="text" placeholder="123.456.789-77" maxlength="14" minlength="14" value="{{old('cpf')}}">
                         @error('cpf')
                             <p class="text-red-500 text-xs italic">
                                 {{$message}}
@@ -58,7 +58,7 @@
 
                 {{-- Linha 2 --}}
                 <div class="flex flex-wrap -mx-3 mb-2">
-                    <div class="w-full md:w-2/3 px-3 mb-6 md:mb-0">
+                    <div class="w-full md:w-2/3 px-3 mb-1 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-light mb-1" for="email">
                             E-mail
                         </label>
@@ -69,7 +69,7 @@
                                 @else
                                     border-gray-200
                                 @endif"
-                            id="email" name="email" type="text" placeholder="estudante@eeccam.com">
+                            id="email" name="email" type="text" placeholder="estudante@eeccam.com" value="{{old('email')}}">
                         @error('email')
                             <p class="text-red-500 text-xs italic">
                                 {{$message}}
@@ -87,7 +87,7 @@
                             @else
                                 border-gray-200
                             @endif"
-                            id="telephone" name="telephone" type="text" placeholder="(00)9.1111-2222" maxlength="14" minlength="14">
+                            id="telephone" name="telephone" type="text" placeholder="(00)9.1111-2222" maxlength="14" minlength="14" value="{{old('telephone')}}">
                         @error('telephone')
                             <p class="text-red-500 text-xs italic">
                                 {{$message}}
@@ -98,13 +98,13 @@
 
                 {{-- Linha 3 --}}
                 <div class="flex flex-wrap -mx-3 mb-2">
-                    <div class="w-full md:w-2/3 px-3 mb-6 md:mb-0">
+                    <div class="w-full md:w-2/3 px-3 mb-1 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-light mb-1" for="logradouro">
                             Logradouro
                         </label>
                         <input
                             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-3 mb-3 leading-tight focus:outline-none focus:bg-white-500 focus:border-gray-600"
-                            id="logradouro" name="logradouro" type="text" placeholder="Nome da rua">
+                            id="logradouro" name="logradouro" type="text" placeholder="Nome da rua" value="{{old('logradouro')}}">
                     </div>
                     <div class="w-full md:w-1/3 px-3">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-light mb-1" for="numero">
@@ -112,19 +112,24 @@
                         </label>
                         <input
                             class="appearance-none block w-full bg-gray-200 text-grey-darker border border-gray-200 rounded py-3 px-3 leading-tight focus:outline-none focus:bg-white-500 focus:border-gray-600"
-                            id="numero" name="numero" type="text" placeholder="Nº da residência" maxlength="6">
+                            id="numero" name="numero" type="text" placeholder="Nº da residência" maxlength="6" value="{{old('numero')}}">
+                        @error('numero')
+                            <p class="text-red-500 text-xs italic">
+                                {{$message}}
+                            </p>
+                        @enderror
                     </div>
                 </div>
 
                 {{-- Linha 4 --}}
                 <div class="flex flex-wrap -mx-3 mb-2">
-                    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                    <div class="w-full md:w-1/2 px-3 mb-1 md:mb-0">
                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-light mb-1" for="bairro">
                             Bairro
                         </label>
                         <div class="relative">
                             <select
-                                class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-2 pr-6 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-2 pr-6 rounded leading-tight focus:outline-none focus:bg-white-500 focus:border-gray-600"
                                 id="bairro" name="bairro">
                                     <option value="{{null}}">Selecione um bairro</option>
                                     <option value="Acampamento">Acampamento</option>
@@ -176,13 +181,13 @@
                         </div>
                     </div>
 
-                    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                    <div class="w-full md:w-1/2 px-3 mb-1 md:mb-0">
                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-light mb-1" for="referencia">
                             Referência
                         </label>
                         <input
-                            class="appearance-none block w-full bg-grey-200 text-grey-darker border border-grey-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                            id="referencia" name="referencia" type="text" placeholder="Ponto de referência">
+                            class="appearance-none block w-full bg-gray-200 text-grey-darker border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white-500 focus:border-gray-600"
+                            id="referencia" name="referencia" type="text" placeholder="Ponto de referência" value="{{old('referencia')}}">
                     </div>
                 </div>
 

@@ -16,7 +16,7 @@
             </a>
         </li>
         <li
-            @if (Request::url() == 'http://localhost:8000/dashboard/estudantes')
+            @if (str_contains(Request::url(), 'http://localhost:8000/dashboard/estudantes'))
                 class="w-full h-full py-3 px-2 border-b border-light-border bg-white"
             @else
                 class="w-full h-full py-3 px-2 border-b border-light-border"

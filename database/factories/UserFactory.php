@@ -17,14 +17,19 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $cpf = fake()->randomNumber(3, true). ".". fake()->randomNumber(3, true). ".". fake()->randomNumber(3, true). "-". fake()->randomNumber(2, true);
+
+        $telephone = "(". fake()->randomNumber(2, true).")". fake()->randomNumber(5, true). "-". fake()->randomNumber(4, true);
+
+
         return [
             'name' => fake()->name(),
             'birthDate' => fake()->date(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'telephone' => fake()->tollFreePhoneNumber(),
+            'telephone' => $telephone,
             'photo' => fake()->imageUrl(),
-            'cpf' => fake()->randomNumber(9, true),
+            'cpf' => $cpf,
             'type' => $this->faker->randomElement(['admin', 'common']),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),

@@ -23,11 +23,15 @@
             <div class="bg-gray-200 px-2 py-3 border-solid border-gray-200 border-b flex-wrap">
                 {{-- Form Grid --}}
                 <img src="@if (isset($user->photo))
-                            {{Storage::url($user->photo)}}
+                            @if (str_contains($user->photo, 'http'))
+                                {{$user->photo}}
+                            @else
+                                {{Storage::url($user->photo)}}
+                            @endif
                         @else
                             {{Storage::url('imgs/sem-foto.png')}}
                         @endif"
-                    alt="Sem foto" class="w-24 mx-auto p-2 rounded-full "
+                    alt="Sem foto" class="w-20 h-20 mx-auto rounded-full"
                 >
                 <div class="tracking-wide font-bold text-lg text-center">
                     {{ucwords($user->name)}}
@@ -283,9 +287,7 @@
                                 <select
                                     class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-2 pr-6 rounded leading-tight focus:outline-none focus:bg-white-500 focus:border-gray-600"
                                     id="bairro" name="bairro">
-                                        <option class="bg-gray-400" value="@if(isset($user->endereco)){{old('numero', $user->endereco->bairro)}}
-                                            @endif">@if(isset($user->endereco)){{old('numero', $user->endereco->bairro)}}
-                                            @endif</option>
+                                        <option class="bg-gray-400" value="@if(isset($user->endereco)){{old('numero', $user->endereco->bairro)}}@else {{null}} @endif">@if(isset($user->endereco)){{old('numero', $user->endereco->bairro)}}@else Selecione um bairro @endif</option>
                                         <option value="Acampamento">Acampamento</option>
                                         <option value="Adjunto Dias">Adjunto Dias</option>
                                         <option value="Alto da Boa Vista">Alto da Boa Vista</option>
@@ -427,8 +429,8 @@
                         <button type="submit" class='bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-4 rounded'>
                             Editar
                         </button>
-                        <a href="{{route('estudantes.index')}}">
-                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Voltar</button>
+                        <a href="{{ route('estudantes.index') }}">
+                            <input type="button" value="Voltar" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer">
                         </a>
                     </div>
                 {{-- </form> --}}

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserStoreRequest;
+use App\Http\Requests\UserUpdateRequest;
 use App\Models\Endereco;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 
 class EstudanteController extends Controller
 {
@@ -24,7 +26,7 @@ class EstudanteController extends Controller
         // Create no index através do modal
     }
 
-    public function store(User $user, Endereco $endereco, UserStoreRequest $request)
+    public function store(UserStoreRequest $request, User $user, Endereco $endereco)
     {
         if ($request->validated())
         {
@@ -34,8 +36,8 @@ class EstudanteController extends Controller
             $user->fill($request->except(['logradouro', 'numero', 'bairro', 'referencia']));
             $user->save();
 
-            $request['cidade'] = "Caicó";
-            $request['cep'] = "59300-000";
+            // $request['cidade'] = "Caicó";
+            // $request['cep'] = "59300-000";
             $endereco->fill($request->except(['name', 'cpf', 'email', 'telephone']));
             $user->endereco()->save($endereco);
 
@@ -48,7 +50,7 @@ class EstudanteController extends Controller
         }
     }
 
-    public function show(User $user)
+    public function show(UserStoreRequest $user)
     {
         dd('chegou ao SHOW do estudante');
     }
@@ -64,9 +66,86 @@ class EstudanteController extends Controller
         ]);
     }
 
-    public function update(Request $request, User $user)
+    public function update(UserUpdateRequest $request, User $user, Endereco $endereco, $id)
     {
-        dd($request->toArray());
+        // dd($request->toArray());
+        if ($request->validated() && $this->senhasIguais($request->password, $request->confirmPassword))
+        {
+            $user = User::find($id);
+            //
+            // início do update no user
+            //
+            $inputs = [
+                'name' => $request->name,
+                'birthDate' => $request->birthDate,
+                'email' => $request->email,
+                'telephone' => $request->telephone,
+                'photo' => $this->inserirImagem($request['photo'], 'perfis'),
+                'cpf' => $request->cpf,
+                'type' => $request->type,
+                'password' => $request->password,
+            ];
+            if ($request->email == $user->email){
+                unset($inputs['email']);
+            }
+            if ($request->password == null) {
+                unset($inputs['password']);
+            }
+            if ($request->photo == null) {
+                unset($inputs['photo']);
+            }
+            $user->update($inputs);
+            //
+            // fim do update no user
+            //
+
+
+            //
+            // início do update do endereço do user
+            //
+            $inputsEndereco = [
+                'logradouro' => $request->logradouro,
+                'numero' => $request->numero,
+                'bairro' => $request->bairro,
+                'cidade' => $request->cidade,
+                'cep' => $request->cep,
+                'comprovante' => $this->inserirImagem($request['comprovante'], 'comprovantes'),
+                'referencia' => $request->referencia,
+            ];
+            // if ($request->comprovante == null) {
+            //     unset($inputsEndereco['comprovante']);
+            // }
+            foreach ($inputsEndereco as $key => $value)
+            {
+                // Remove do array toda CHAVE com valor NULL
+                if ($value == null)
+                {
+                    unset($inputsEndereco[$key]);
+                }
+            }
+
+            if($user->endereco == null){
+                // Se NÃO tiver ENDEREÇO cadastrado
+                $endereco->fill($inputsEndereco);
+                $user->endereco()->save($endereco);
+            }
+            else{
+                // Se tiver ENDEREÇO cadastrado
+                $user->endereco->fill($inputsEndereco);
+                $user->endereco()->save($user->endereco);
+            }
+
+
+            //
+            // fim do update do endereço do user
+            //
+
+            return Redirect::route('estudantes.index');
+        }
+        else
+        {
+            return redirect()->back();
+        }
     }
 
     public function destroy(User $user)
@@ -74,8 +153,33 @@ class EstudanteController extends Controller
         //
     }
 
-    private function telephoneUnique($telephone)
+    private function senhasIguais($password, $confirmPassword)
     {
-        // $telUnique = (count(User::where('telephone', '=', $request->telephone)->get()) > 0) ? false : true ;
+        if ($password === $confirmPassword)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    private function inserirImagem($reqImagem, $disk)
+    {
+        if ($reqImagem != null && $reqImagem->isValid())
+        {
+            if (!empty($reqImagem))
+            {
+                // Apaga foto adicionada anteriormente
+                Storage::disk('public')->delete($reqImagem ?? '');
+            }
+            $path = $reqImagem->store($disk, 'public');
+            return $path;
+        }
+        else
+        {
+            return null;
+        }
     }
 }

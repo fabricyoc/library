@@ -49,21 +49,24 @@
                             <tr>
                                 <td class="border px-4 py-2">
                                     <img
-                                        src="
-                                            @if (str_contains($e->photo, 'perfil/'))
-                                                {{Storage::url($e->photo)}}
+                                        class="w-20 h-20 mx-auto rounded-full"
+                                        alt=""
+                                        src="@if (isset($e->photo))
+                                                @if (str_contains($e->photo, '//'))
+                                                    {{-- Photo do factory --}}
+                                                    {{$e->photo}}
                                                 @else
-                                                {{-- Abaixo pega as imagens do fake (server quebrado) --}}
-                                                {{-- {{$e->photo}} --}}
-
-                                                {{-- Abaixo pega a imagem sem-foto.png --}}
+                                                    {{-- Photo inserida pelo user --}}
+                                                    {{Storage::url($e->photo)}}
+                                                @endif
+                                            @else
+                                                {{-- Sem photo de nada! --}}
                                                 {{Storage::url('imgs/sem-foto.png')}}
                                             @endif"
-                                        alt="Sem foto"
                                     >
-
                                 </td>
-                                <td class="border px-4 py-2">{{$e->name}}</td>
+                                <td class="border px-4 py-2">{{$e->name}}
+                                </td>
                                 <td class="border px-4 py-2">{{$e->email}}</td>
                                 <td class="border px-4 py-2">{{$e->telephone}}</td>
                                 <td class="border px-4 py-2 text-center">

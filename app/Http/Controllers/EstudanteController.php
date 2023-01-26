@@ -50,17 +50,23 @@ class EstudanteController extends Controller
 
     public function show(User $user)
     {
-        //
+        dd('chegou ao SHOW do estudante');
     }
 
-    public function edit(User $user)
+    public function edit($id)
     {
-        //
+        $user = User::find($id);
+
+        // dd($user->load('endereco')->toArray());
+
+        return view('estudantes.edit', [
+            'user' => $user
+        ]);
     }
 
     public function update(Request $request, User $user)
     {
-        //
+        dd($request->toArray());
     }
 
     public function destroy(User $user)

@@ -16,7 +16,6 @@
 
 
 <!--Grid Form-->
-
 <div class="flex flex-1  flex-col md:flex-row lg:flex-row mx-4 mt-2">
     <div class="mb-2 border-solid border-gray-300 rounded border shadow-sm w-full">
         <div class="bg-gray-200 px-2 py-3 border-solid border-gray-200 border-b flex justify-between">
@@ -37,9 +36,10 @@
                   <tr>
                     <th class="border w-1/6 px-4 py-2">Foto</th>
                     <th class="border w-1/4 px-4 py-2">Nome</th>
-                    <th class="border w-1/6 px-4 py-2">E-mail</th>
+                    <th class="border w-1/4 px-4 py-2">E-mail</th>
+                    {{-- <th class="border w-1/6 px-4 py-2">E-mail</th> --}}
                     <th class="border w-1/6 px-4 py-2">Telefone</th>
-                    <th class="border w-1/7 px-4 py-2">Status</th>
+                    <th class="border w-1/7 px-4 py-2" title="Cadastro Completo?">Status</th>
                     <th class="border w-1/5 px-4 py-2">Ações</th>
                   </tr>
                 </thead>
@@ -66,17 +66,22 @@
                                 <td class="border px-4 py-2">{{$e->name}}</td>
                                 <td class="border px-4 py-2">{{$e->email}}</td>
                                 <td class="border px-4 py-2">{{$e->telephone}}</td>
-                                <td class="border px-4 py-2">
-                                    <i class="fas fa-check text-green-500 mx-2"></i>
-                                    {{-- <i class="fas fa-times text-red-500 mx-2"></i> --}}
+                                <td class="border px-4 py-2 text-center">
+                                    @if (isset($e->endereco))
+                                        <i class="fas fa-check text-green-500 mx-2"></i>
+                                    @else
+                                        <a href="{{route('estudantes.edit', $e->id)}}" title="Completar cadastro...">
+                                            <i class="fas fa-times text-red-500 mx-2"></i>
+                                        </a>
+                                    @endif
                                 </td>
-                                <td class="border px-4 py-2">
-                                    <a class="bg-teal-300 cursor-pointer rounded p-1 mx-1 text-white">
-                                            <i class="fas fa-eye"></i></a>
-                                    <a class="bg-teal-300 cursor-pointer rounded p-1 mx-1 text-white">
-                                            <i class="fas fa-edit"></i></a>
-                                    <a class="bg-teal-300 cursor-pointer rounded p-1 mx-1 text-red-500">
-                                            <i class="fas fa-trash"></i>
+                                <td class="border px-4 py-2 text-center">
+                                    <a href="{{route('estudantes.show', $e->id)}}" title="Ver" class="bg-teal-300 cursor-pointer rounded-md p-1.5 mx-1 text-white">
+                                            <i class="fas fa-eye sm:my-2.5"></i></a>
+                                    <a href="{{route('estudantes.edit', $e->id)}}" title="Editar" class="bg-teal-300 cursor-pointer rounded-md p-1.5 mx-1 text-white">
+                                            <i class="fas fa-edit sm:my-2.5"></i></a>
+                                    <a title="Excluir" class="bg-teal-300 cursor-pointer rounded-md p-1.5 mx-1 text-red-500">
+                                            <i class="fas fa-trash sm:my-2.5"></i>
                                     </a>
                                 </td>
                             </tr>

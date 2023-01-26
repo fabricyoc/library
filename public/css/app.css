@@ -626,6 +626,9 @@ video {
 .mt-3 {
   margin-top: 0.75rem;
 }
+.ml-3 {
+  margin-left: 0.75rem;
+}
 .block {
   display: block;
 }
@@ -707,6 +710,9 @@ video {
 .w-4 {
   width: 1rem;
 }
+.w-24 {
+  width: 6rem;
+}
 .w-1\/6 {
   width: 16.666667%;
 }
@@ -783,6 +789,9 @@ video {
 }
 .rounded-full {
   border-radius: 9999px;
+}
+.rounded-md {
+  border-radius: 0.375rem;
 }
 .rounded-t-lg {
   border-top-left-radius: 0.5rem;
@@ -889,6 +898,14 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(209 213 219 / var(--tw-bg-opacity));
 }
+.bg-gray-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(75 85 99 / var(--tw-bg-opacity));
+}
+.bg-gray-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(156 163 175 / var(--tw-bg-opacity));
+}
 .fill-current {
   fill: currentColor;
 }
@@ -909,6 +926,9 @@ video {
 }
 .p-3 {
   padding: 0.75rem;
+}
+.p-1\.5 {
+  padding: 0.375rem;
 }
 .py-4 {
   padding-top: 1rem;
@@ -941,6 +961,10 @@ video {
 .py-3 {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
+}
+.py-2\.5 {
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
 }
 .pt-8 {
   padding-top: 2rem;
@@ -1074,6 +1098,18 @@ video {
   --tw-text-opacity: 1;
   color: rgb(127 29 29 / var(--tw-text-opacity));
 }
+.text-red-200 {
+  --tw-text-opacity: 1;
+  color: rgb(254 202 202 / var(--tw-text-opacity));
+}
+.text-red-400 {
+  --tw-text-opacity: 1;
+  color: rgb(248 113 113 / var(--tw-text-opacity));
+}
+.text-blue-500 {
+  --tw-text-opacity: 1;
+  color: rgb(59 130 246 / var(--tw-text-opacity));
+}
 .underline {
   text-decoration-line: underline;
 }
@@ -1185,6 +1221,16 @@ video {
 }
 @media (min-width: 640px) {
 
+  .sm\:my-2\.5 {
+    margin-top: 0.625rem;
+    margin-bottom: 0.625rem;
+  }
+
+  .sm\:my-2 {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
   .sm\:ml-0 {
     margin-left: 0px;
   }
@@ -1241,6 +1287,10 @@ video {
     margin-bottom: 0px;
   }
 
+  .md\:mb-1 {
+    margin-bottom: 0.25rem;
+  }
+
   .md\:block {
     display: block;
   }
@@ -1267,6 +1317,14 @@ video {
 
   .md\:w-full {
     width: 100%;
+  }
+
+  .md\:w-1\/5 {
+    width: 20%;
+  }
+
+  .md\:w-1\/12 {
+    width: 8.333333%;
   }
 
   .md\:grid-cols-2 {

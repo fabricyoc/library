@@ -31,7 +31,8 @@ class UserFactory extends Factory
             'photo' => fake()->imageUrl(),
             'cpf' => $cpf,
             'type' => $this->faker->randomElement(['admin', 'common']),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            // 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' => bcrypt(preg_replace('/[^0-9]/', '', $cpf)), // password
             'remember_token' => Str::random(10),
         ];
     }

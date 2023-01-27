@@ -111,6 +111,34 @@ function somenteNumeros(e) {
 }
 // FIM :: CAMPO APENAS COM NÚMEROS
 
+// INÍCIO :: Máscara para CEP
+var inputCep = document.querySelector("#cep");
+inputCep.addEventListener("keyup", formatarCep);
+function formatarCep(e) {
+  var v = e.target.value.replace(/\D/g, "");
+  v = v.replace(/^(\d{5})(\d)/, "$1-$2");
+  e.target.value = v;
+}
+// FIM :: Máscara para CEP
+
+// INÍCIO :: Ver password
+document.querySelector('#verPassword').addEventListener('mousedown', function () {
+  if (document.querySelector('#password').type == 'password') {
+    document.querySelector('#password').type = 'text';
+  } else {
+    document.querySelector('#password').type = 'password';
+  }
+});
+document.querySelector('#verConfirmPassword').addEventListener('mousedown', function () {
+  if (document.querySelector('#confirmPassword').type == 'password') {
+    document.querySelector('#confirmPassword').type = 'text';
+  } else {
+    document.querySelector('#confirmPassword').type = 'password';
+  }
+});
+verConfirmPassword;
+// FIM :: Ver password
+
 /***/ }),
 
 /***/ "./resources/css/all.css":

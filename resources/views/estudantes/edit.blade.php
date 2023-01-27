@@ -183,9 +183,15 @@
                         </div>
                         {{-- Password --}}
                         <div class="w-full md:w-1/3 px-3 mb-2 md:mb-1">
-                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-light mb-1" for="password">
+                            <label class="flex block uppercase tracking-wide text-gray-700 text-xs font-light mb-1" for="password">
                                 Senha
+                                <svg id="verPassword" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                class="flex ml-1 w-4 h-4 cursor-pointer">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
                             </label>
+
                             <input
                                 class="appearance-none block w-full bg-gray-200 text-grey-darker border rounded py-3 px-2 leading-tight focus:outline-none focus:bg-white-500 focus:border-gray-600
                                     @if ($errors->has('password'))
@@ -194,6 +200,7 @@
                                         border-gray-200
                                     @endif"
                                 id="password" name="password" type="password" placeholder="Digite sua senha">
+
                             @error('password')
                                 <p class="text-red-500 text-xs italic">
                                     {{$message}}
@@ -202,8 +209,13 @@
                         </div>
                         {{-- Confirm password --}}
                         <div class="w-full md:w-1/3 px-3 mb-2 md:mb-1">
-                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-light mb-1" for="confirmPassword">
+                            <label class="flex block uppercase tracking-wide text-gray-700 text-xs font-light mb-1" for="confirmPassword">
                                 Confirme sua senha
+                                <svg id="verConfirmPassword" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                class="flex ml-1 w-4 h-4 cursor-pointer">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
                             </label>
                             <input
                                 class="appearance-none block w-full bg-gray-200 text-grey-darker border rounded py-3 px-2 leading-tight focus:outline-none focus:bg-white-500 focus:border-gray-600
@@ -372,7 +384,7 @@
                                     @else
                                         border-gray-200
                                     @endif"
-                                id="cep" name="cep" type="text" placeholder="Digite o CEP" value="@if(isset($user->endereco)){{old('cep', $user->endereco->cep)}}@endif">
+                                id="cep" name="cep" type="text" placeholder="Digite o CEP" maxlength="9" value="@if(isset($user->endereco)){{old('cep', $user->endereco->cep)}}@endif">
 
                                 @error('cep')
                                     <p class="text-red-500 text-xs italic">

@@ -17,13 +17,15 @@ class EnderecoFactory extends Factory
      */
     public function definition()
     {
+        $cep = fake()->randomNumber(5, true). "-". fake()->randomNumber(3, true);
+
         return [
             'user_id' => User::inRandomOrder()->first()->id,
             'logradouro' => fake()->streetName(),
             'numero' => fake()->buildingNumber(),
             'bairro' => fake()->state(),
             'cidade' => fake()->city(),
-            'cep' => fake()->postcode(),
+            'cep' => $cep,
             'comprovante' => fake()->imageUrl(),
             'referencia' => fake()->streetSuffix(),
         ];

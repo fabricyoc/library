@@ -39,6 +39,7 @@
             </div>
             <div class="p-3">
                 {{-- <form class="w-full"> --}}
+                    {{-- Name, CPF e E-mail --}}
                     <div class="flex flex-wrap -mx-3 mb-2">
                         {{-- Name --}}
                         <div class="w-full md:w-1/3 px-3 mb-2 md:mb-1">
@@ -184,7 +185,7 @@
                         {{-- Password --}}
                         <div class="w-full md:w-1/3 px-3 mb-2 md:mb-1">
                             <label class="flex block uppercase tracking-wide text-gray-700 text-xs font-light mb-1" for="password">
-                                Senha
+                                Nova senha
                                 <svg id="verPassword" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                 class="flex ml-1 w-4 h-4 cursor-pointer">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
@@ -210,7 +211,7 @@
                         {{-- Confirm password --}}
                         <div class="w-full md:w-1/3 px-3 mb-2 md:mb-1">
                             <label class="flex block uppercase tracking-wide text-gray-700 text-xs font-light mb-1" for="confirmPassword">
-                                Confirme sua senha
+                                Confirme sua nova senha
                                 <svg id="verConfirmPassword" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                 class="flex ml-1 w-4 h-4 cursor-pointer">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
@@ -225,6 +226,8 @@
                                         border-gray-200
                                     @endif"
                                 id="confirmPassword" name="confirmPassword" type="password" placeholder="Digite sua senha novamente">
+
+                            <p id="senhasDiferentes" class="text-red-500 text-xs italic"></p>
                             @error('confirmPassword')
                                 <p class="text-red-500 text-xs italic">
                                     {{$message}}

@@ -79,7 +79,7 @@
                                     @endif
                                 </td>
                                 <td class="border px-4 py-2 text-center">
-                                    <a href="{{route('estudantes.show', $e->id)}}" title="Ver" class="bg-teal-300 cursor-pointer rounded-md p-1.5 mx-1 text-white">
+                                    <a href="#" title="Ver" class="bg-teal-300 cursor-pointer rounded-md p-1.5 mx-1 text-white">
                                             <i class="fas fa-eye sm:my-2.5"></i></a>
                                     <a href="{{route('estudantes.edit', $e->id)}}" title="Editar" class="bg-teal-300 cursor-pointer rounded-md p-1.5 mx-1 text-white">
                                             <i class="fas fa-edit sm:my-2.5"></i></a>

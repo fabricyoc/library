@@ -118,8 +118,8 @@ const inputCep = document.querySelector("#cep");
 inputCep.addEventListener("keyup", formatarCep);
 
 function formatarCep(e){
-    var v= e.target.value.replace(/\D/g,"")
-    v=v.replace(/^(\d{5})(\d)/,"$1-$2")
+    var v= e.target.value.replace(/\D/g,"");
+    v=v.replace(/^(\d{5})(\d)/,"$1-$2");
     e.target.value = v;
 }
 // FIM :: Máscara para CEP
@@ -144,3 +144,47 @@ document.querySelector('#verConfirmPassword').addEventListener('mousedown', func
 });
 verConfirmPassword
 // FIM :: Ver password
+
+// INÍCIO :: Verificar se senhas iguais
+let inputPassword = document.querySelector('#password');
+let inputConfirmPassword = document.querySelector('#confirmPassword');
+
+function senhasIguais(){
+    if (inputPassword.value != inputConfirmPassword.value) {
+
+        inputPassword.classList.add("border-red-500");
+        inputConfirmPassword.classList.add("border-red-500");
+        document.querySelector('#senhasDiferentes').innerHTML = "Senhas diferentes";
+
+    }
+    else {
+        inputPassword.classList.remove("border-red-500");
+        inputConfirmPassword.classList.remove("border-red-500");
+        document.querySelector('#senhasDiferentes').innerHTML = null;
+    }
+}
+
+inputPassword.addEventListener('keyup', senhasIguais);
+inputConfirmPassword.addEventListener('keyup', senhasIguais);
+// FIM :: Verificar se senhas iguais
+
+// INÍCIO :: Não existe logradouro sem número e vice-versa
+function logradouroNumero() {
+    if (document.querySelector('#logradouro').value != "" &&
+    document.querySelector('#numero').value == "")
+    {
+        document.querySelector('#numero').classList.add("border-red-500");
+    }
+    else if (document.querySelector('#logradouro').value == "" &&
+    document.querySelector('#numero').value != "")
+    {
+        document.querySelector('#logradouro').classList.add("border-red-500");
+    }
+    else {
+        document.querySelector('#numero').classList.remove("border-red-500");
+        document.querySelector('#logradouro').classList.remove("border-red-500");
+    }
+}
+document.querySelector('#logradouro').addEventListener('keyup', logradouroNumero);
+document.querySelector('#numero').addEventListener('keyup', logradouroNumero);
+// FIM :: Não existe logradouro sem número e vice-versa

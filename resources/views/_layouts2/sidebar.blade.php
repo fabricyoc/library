@@ -48,8 +48,13 @@
                 <span><i class="fa fa-angle-right float-right"></i></span>
             </a>
         </li>
-        <li id="emprestimos" class="w-full h-full py-3 px-2 border-b border-light-border">
-            <a href="ui.html"
+        <li @if (str_contains(Request::url(), 'http://localhost:8000/dashboard/emprestimos'))
+                class="w-full h-full py-3 px-2 border-b border-light-border bg-white"
+            @else
+                class="w-full h-full py-3 px-2 border-b border-light-border"
+            @endif
+        >
+            <a href="{{route('emprestimos.index')}}"
                class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">
                 {{-- <i class="fab fa-uikit float-left mx-2"></i> --}}
                 <i class="fas fa-book-open float-left mx-2"></i>

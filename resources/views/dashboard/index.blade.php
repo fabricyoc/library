@@ -34,7 +34,7 @@
 
         <div class="shadow bg-success border-l-8 hover:bg-success-dark border-success-dark mb-2 p-2 md:w-1/4 mx-2">
             <div class="p-4 flex flex-col">
-                <a href="#" class="no-underline text-white text-2xl">
+                <a href="{{route('emprestimos.index')}}" class="no-underline text-white text-2xl">
                     Empréstimos
                 </a>
                 {{-- <a href="#" class="no-underline text-white text-lg"></a> --}}

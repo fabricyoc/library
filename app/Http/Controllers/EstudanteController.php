@@ -80,7 +80,7 @@ class EstudanteController extends Controller
                 'birthDate' => $request->birthDate,
                 'email' => $request->email,
                 'telephone' => $request->telephone,
-                'photo' => $this->inserirImagem($request['photo'], 'perfis'),
+                'photo' => $this->inserirImagem($request['photo'], 'perfis', $user->photo),
                 'cpf' => $request->cpf,
                 'type' => $request->type,
                 'password' => $request->password,
@@ -109,7 +109,7 @@ class EstudanteController extends Controller
                 'bairro' => $request->bairro,
                 'cidade' => $request->cidade,
                 'cep' => $request->cep,
-                'comprovante' => $this->inserirImagem($request['comprovante'], 'comprovantes'),
+                'comprovante' => $this->inserirImagem($request['comprovante'], 'comprovantes', $user->endereco->comprovante),
                 'referencia' => $request->referencia,
             ];
             // if ($request->comprovante == null) {
@@ -165,14 +165,14 @@ class EstudanteController extends Controller
         }
     }
 
-    private function inserirImagem($reqImagem, $disk)
+    private function inserirImagem($reqImagem, $disk, $modelImagem)
     {
         if ($reqImagem != null && $reqImagem->isValid())
         {
             if (!empty($reqImagem))
             {
                 // Apaga foto adicionada anteriormente
-                Storage::disk('public')->delete($reqImagem ?? '');
+                Storage::disk('public')->delete($modelImagem ?? '');
             }
             $path = $reqImagem->store($disk, 'public');
             return $path;

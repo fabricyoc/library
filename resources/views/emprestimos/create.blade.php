@@ -12,22 +12,22 @@
                </div>
             </div>
             <!-- Modal content -->
-            <form id='form_id' class="w-full" method="post" action="#">
+            <form id='form_id' class="w-full" method="post" action="{{route('emprestimos.store')}}">
                 @csrf
 
                 {{-- Linha 1 :: Estudante --}}
                 <div class="flex flex-wrap -mx-3 mb-2">
                     <div class="w-full md:w-full px-3 mb-1 md:mb-0">
-                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-light mb-1" for="name">
+                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-light mb-1" for="estudante">
                             Estudante
                         </label>
                         <div class="relative">
                             <select
                                 class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-2 pr-6 rounded leading-tight focus:outline-none focus:bg-white-500 focus:border-gray-600"
-                                id="name" name="name">
+                                id="estudante" name="estudante">
                                     <option value="{{null}}">Selecione um estudante</option>
                                     @foreach ($estudantes as $e)
-                                        <option value="{{$e->name}}">{{ucwords($e->name)}}</option>
+                                        <option value="{{$e->id}}">{{ucwords($e->name)}}</option>
                                     @endforeach
                             </select>
                             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-grey-darker">
@@ -42,16 +42,16 @@
                 {{-- Linha 2 :: Livro --}}
                 <div class="flex flex-wrap -mx-3 mb-2">
                     <div class="w-full md:w-full px-3 mb-1 md:mb-0">
-                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-light mb-1" for="titulo">
+                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-light mb-1" for="livro">
                             Livro
                         </label>
                         <div class="relative">
                             <select
                                 class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-2 pr-6 rounded leading-tight focus:outline-none focus:bg-white-500 focus:border-gray-600"
-                                id="titulo" name="titulo">
+                                id="livro" name="livro">
                                     <option value="{{null}}">Selecione um livro</option>
                                     @foreach ($livros as $l)
-                                        <option value="{{$l->titulo}}">{{ucwords($l->titulo)}}</option>
+                                        <option value="{{$l->id}}">{{ucwords($l->titulo)}}</option>
                                     @endforeach
                             </select>
                             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-grey-darker">

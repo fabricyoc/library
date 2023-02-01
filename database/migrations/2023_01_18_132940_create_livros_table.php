@@ -30,6 +30,25 @@ return new class extends Migration
 
             $table->timestamps();
         });
+
+        // tabela pivot (EMPRESTAR) no singular e em ordem alfabética
+        Schema::create('livro_user', function (Blueprint $table) {
+            $table->id();
+
+            $table->foreignId('livro_id')
+                ->constrained()
+                ->onDelete('CASCADE')
+                ->onUpdate('CASCADE');
+            $table->foreignId('user_id')
+                ->constrained()
+                ->onDelete('CASCADE')
+                ->onUpdate('CASCADE');
+            // $table->date('emprestimo'); // data do empréstimo
+            $table->date('devolucao'); // data da devolução
+            $table->boolean('renovacao')->default(false); // já renovou? se não, + 15 dias
+
+            $table->timestamps();
+        });
     }
 
     /**
@@ -40,5 +59,6 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('livros');
+        Schema::dropIfExists('livro_user');
     }
 };

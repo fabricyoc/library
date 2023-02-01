@@ -13,7 +13,24 @@ class DashboardController extends Controller
         $totEstudantes = User::where('type', '=', 'common')->count();
         $totFuncionarios = User::where('type', '=', 'admin')->count();
         $totLivros = Livro::all()->count();
+        $totEmprestimos = $this->totEmprestimos(Livro::all());
 
-        return view('dashboard.index', compact('totEstudantes', 'totFuncionarios', 'totLivros'));
+        return view('dashboard.index', compact('totEstudantes', 'totFuncionarios', 'totLivros', 'totEmprestimos'));
+    }
+
+    private function totEmprestimos($modelLivro)
+    {
+        $livros = $modelLivro; //pega todos os livros
+        $totEmprestimos = 0;
+
+        foreach ($livros as $l)
+        {
+            foreach ($l->users as $u)
+            {
+                $totEmprestimos++;
+            }
+        }
+
+        return $totEmprestimos;
     }
 }

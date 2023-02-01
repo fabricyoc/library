@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Livro;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class EmprestimosController extends Controller
 {
@@ -42,7 +43,8 @@ class EmprestimosController extends Controller
         }
 
 
-        dd($user->load('livros')->toArray());
+        // dd($user->load('livros')->toArray());
+        return Redirect::route('emprestimos.index');
     }
 
     public function show($id)
@@ -55,9 +57,34 @@ class EmprestimosController extends Controller
         //
     }
 
-    public function update(Request $request, $id)
+    // public function update(Request $request, $id)
+    public function update($id)
     {
-        dd('X');
+        // Renovar livro
+        $users = User::where('type', '=', 'common')->get();
+
+        foreach ($users as $user)
+        {
+            foreach ($user->livros as $user_livro)
+            {
+                if($user_livro->pivot->id == $id)
+                {
+                    // $nova_data_devolucao = date('Y-m-d', strtotime('+15 days', strtotime($user_livro->pivot->devolucao)));
+                    $nova_data_devolucao = date('Y-m-d', strtotime('+15 days'));
+
+                    $user_livro->pivot->renovacao = true;
+                    $user_livro->pivot->devolucao = $nova_data_devolucao;
+                    $user_livro->pivot->save();
+
+                    return Redirect::route('emprestimos.index');
+                }
+            }
+        }
+    }
+
+    public function update2($id)
+    {
+        // Entregar livro
     }
 
     public function destroy($id)

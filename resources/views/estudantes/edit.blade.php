@@ -102,6 +102,7 @@
                         </div>
                     </div>
 
+                    {{-- Telephone, birthDate, photo --}}
                     <div class="flex flex-wrap -mx-3 mb-2">
                         {{-- Telephone --}}
                         <div class="w-full md:w-1/3 px-3 mb-2 md:mb-1">
@@ -152,6 +153,7 @@
                         </div>
                     </div>
 
+                    {{-- Type, password, confirmPassword --}}
                     <div class="flex flex-wrap -mx-3 mb-2">
                         {{-- Type --}}
                         <div class="w-full md:w-1/3 px-3 mb-2 md:mb-1">
@@ -420,7 +422,15 @@
                                 Comprovante
                                 @if (isset($user->endereco->comprovante))
                                     <div class="text-green-500">
-                                        (Anexo existente)
+                                        <a target="_blank" href="
+                                            @if (str_contains($user->endereco->comprovante, 'http'))
+                                                {{$user->endereco->comprovante}}
+                                            @else
+                                                {{Storage::url($user->endereco->comprovante)}}
+                                            @endif"
+                                        >
+                                            (Anexo existente)
+                                        </a>
                                     </div>
                                 @else
                                     <div class="text-red-500">

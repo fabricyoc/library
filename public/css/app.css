@@ -713,17 +713,14 @@ video {
 .w-4 {
   width: 1rem;
 }
-.w-1\/6 {
-  width: 16.666667%;
-}
 .w-1\/4 {
   width: 25%;
 }
+.w-1\/6 {
+  width: 16.666667%;
+}
 .w-1\/5 {
   width: 20%;
-}
-.w-1\/12 {
-  width: 8.333333%;
 }
 .max-w-6xl {
   max-width: 72rem;

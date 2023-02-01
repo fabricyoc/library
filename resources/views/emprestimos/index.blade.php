@@ -59,16 +59,23 @@
                     @foreach ($estudantes as $e)
                         @if (!empty($e->livros))
                             @foreach ($e->livros as $livro)
+
+                            {{-- Renovar por mais 15 dias --}}
+                            {{-- {{date('d/m/Y', strtotime('+15 days', strtotime($livro->pivot->devolucao)))}} --}}
+
                                 <tr>
                                     <td class="border px-4 py-2">{{ucwords($e->name)}}</td>
                                     <td class="border px-4 py-2">{{ucwords($livro->titulo)}}</td>
+                                    {{-- Data de empréstimo --}}
                                     <td class="border px-4 py-2">{{date('d/m/Y', strtotime($livro->pivot->created_at))}}</td>
+                                    {{-- Data de devolução --}}
                                     <td class="border px-4 py-2">{{date('d/m/Y', strtotime($livro->pivot->devolucao))}}</td>
                                     <td class="border px-4 py-2 text-center">
                                         @if ($livro->pivot->renovacao == false)
                                             <form action="{{route('emprestimos.update', $livro->pivot->id)}}" method="post">
                                                 @csrf
                                                 @method('put')
+
                                                 <button>
                                                     <i class="fas fa-check text-green-500 mx-2" title="Renovar por mais 15 dias"></i>
                                                 </button>

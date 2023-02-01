@@ -14,32 +14,23 @@
                 </div>
         </a>
 
-        <div class="shadow bg-info border-l-8 hover:bg-info-dark border-info-dark mb-2 p-2 md:w-1/4 mx-2">
-            <div class="p-4 flex flex-col">
-                <a href="#" class="no-underline text-white text-2xl">
-                    Funcionários
-                </a>
-                {{-- <a href="#" class="no-underline text-white text-lg"></a> --}}
+        <a href="#" class="shadow bg-info border-l-8 hover:bg-info-dark border-info-dark mb-2 p-2 md:w-1/4 mx-2">
+            <div class="p-4 flex flex-col no-underline text-white text-2xl">
+                Funcionários
             </div>
-        </div>
+        </a>
 
-        <div class="shadow bg-warning border-l-8 hover:bg-warning-dark border-warning-dark mb-2 p-2 md:w-1/4 mx-2">
-            <div class="p-4 flex flex-col">
-                <a href="#" class="no-underline text-white text-2xl">
-                    Livros
-                </a>
-                {{-- <a href="#" class="no-underline text-white text-lg"></a> --}}
+        <a href="#" class="shadow bg-warning border-l-8 hover:bg-warning-dark border-warning-dark mb-2 p-2 md:w-1/4 mx-2">
+            <div class="p-4 flex flex-col no-underline text-white text-2xl">
+                Livros
             </div>
-        </div>
+        </a>
 
-        <div class="shadow bg-success border-l-8 hover:bg-success-dark border-success-dark mb-2 p-2 md:w-1/4 mx-2">
-            <div class="p-4 flex flex-col">
-                <a href="{{route('emprestimos.index')}}" class="no-underline text-white text-2xl">
-                    Empréstimos
-                </a>
-                {{-- <a href="#" class="no-underline text-white text-lg"></a> --}}
+        <a href="{{route('emprestimos.index')}}" class="shadow bg-success border-l-8 hover:bg-success-dark border-success-dark mb-2 p-2 md:w-1/4 mx-2">
+            <div class="p-4 flex flex-col no-underline text-white text-2xl">
+                Empréstimos
             </div>
-        </div>
+        </a>
     </div>
     <!-- /Stats Row Ends Here -->
 
@@ -114,7 +105,7 @@
                                 Empréstimos
                             </button>
                         </td>
-                        <td>#####</td>
+                        <td>{{number_format($totEmprestimos, null, ",", ".")}}</td>
                         {{-- <td>3000</td> --}}
                         {{-- <td>
                             <span class="text-green-500"><i class="fas fa-arrow-up"></i>65%</span>

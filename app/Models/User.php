@@ -55,6 +55,10 @@ class User extends Authenticatable
     public function livros()
     {
         // return $this->belongsToMany(Livro::class);
-        return $this->belongsToMany(Livro::class)->withPivot(['devolucao', 'renovacao', 'created_at', 'id']);
+
+        // Tava assim:
+        // return $this->belongsToMany(Livro::class)->withPivot(['devolucao', 'renovacao', 'created_at', 'id']);
+
+        return $this->belongsToMany(Livro::class)->withPivot(['devolucao', 'renovacao', 'created_at', 'id'])->using(LivroUser::class);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Livro;
+use App\Models\LivroUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -19,19 +20,38 @@ class EmprestimosController extends Controller
         // Sem aviso sobre o filtro
         $aviso = false;
 
-        // Filtro de estudantes
-        if ($request->pesquisar != null) {
-            $estudantes = User::query();
+        // Inicializar variável
+        $estudantes_com_livros = '';
 
-            $estudantes->when($request->pesquisar, function($query, $vl) {
+        // Filtro de estudantes
+        if ($request->pesquisar != null)
+        {
+            // $estudantes = User::query();
+            $estudantes_com_livros = User::query();
+
+            // $estudantes->when($request->pesquisar, function($query, $vl) {
+            $estudantes_com_livros->when($request->pesquisar, function($query, $vl) {
                 $query->where('name', 'like', '%'. $vl. '%');
             });
 
-            $estudantes = $estudantes->get();
+            $estudantes_com_livros = $estudantes_com_livros->get();
             $aviso = true;
         }
+        // Sem filtro :: index padrão
+        else
+        {
+            $livros_users = LivroUser::orderBy('devolucao')->get();
+            $estudantes_com_livros = [];
+            foreach ($livros_users as $lu)
+            {
+                $estudante = User::find($lu->user_id);
+                array_push($estudantes_com_livros, $estudante);
+            }
+        }
 
-        return view('emprestimos.index', compact('estudantes', 'livros', 'aviso'));
+
+
+        return view('emprestimos.index', compact('estudantes', 'livros', 'aviso', 'estudantes_com_livros'));
     }
 
     public function create()

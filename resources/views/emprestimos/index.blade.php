@@ -81,7 +81,8 @@
                   </tr>
                 </thead>
                 <tbody>
-                    @foreach ($estudantes as $e)
+                    {{-- @foreach ($estudantes as $e) --}}
+                    @foreach ($estudantes_com_livros as $e)
                         @if (!empty($e->livros))
                             @foreach ($e->livros as $livro)
 

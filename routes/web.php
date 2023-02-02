@@ -20,6 +20,7 @@ Route::prefix('dashboard')->group(function(){
     Route::resource('funcionarios', FuncionarioController::class);
     Route::resource('estudantes', EstudanteController::class);
     Route::resource('emprestimos', EmprestimosController::class);
+    Route::get('emprestimos/{emprestimo}/delete', [EmprestimosController::class, 'destroy'])->name('emprestimos.destroy');
 });
 
 

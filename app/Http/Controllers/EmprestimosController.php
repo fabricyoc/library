@@ -9,14 +9,29 @@ use Illuminate\Support\Facades\Redirect;
 
 class EmprestimosController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $estudantes = User::where('type', '=', 'common')->orderBy('name')->get();
 
         // exibirá apenas os livros que estão em estoque
         $livros = Livro::where('emprestimo', '>', 0)->orderBy('titulo')->get();
 
-        return view('emprestimos.index', compact('estudantes', 'livros'));
+        // Sem aviso sobre o filtro
+        $aviso = false;
+
+        // Filtro de estudantes
+        if ($request->pesquisar != null) {
+            $estudantes = User::query();
+
+            $estudantes->when($request->pesquisar, function($query, $vl) {
+                $query->where('name', 'like', '%'. $vl. '%');
+            });
+
+            $estudantes = $estudantes->get();
+            $aviso = true;
+        }
+
+        return view('emprestimos.index', compact('estudantes', 'livros', 'aviso'));
     }
 
     public function create()
@@ -54,7 +69,8 @@ class EmprestimosController extends Controller
 
     public function edit($id)
     {
-        //
+        // Formulário para entrega do livro
+        // return view('emprestimos.edit');
     }
 
     // public function update(Request $request, $id)
@@ -82,13 +98,27 @@ class EmprestimosController extends Controller
         }
     }
 
-    public function update2($id)
-    {
-        // Entregar livro
-    }
-
     public function destroy($id)
     {
-        //
+        // Entregar livro
+        $users = User::where('type', '=', 'common')->get();
+
+        foreach ($users as $user)
+        {
+            foreach ($user->livros as $user_livro)
+            {
+                if($user_livro->pivot->id == $id)
+                {
+                    // Aumenta 1 no estoque de empréstimos
+                    $user_livro->emprestimo++;
+                    $user_livro->save();
+
+                    // Deleta o relacionamento entre usuário e o livro
+                    $user_livro->pivot->delete();
+
+                    return Redirect::route('emprestimos.index');
+                }
+            }
+        }
     }
 }

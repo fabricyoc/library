@@ -36,9 +36,34 @@
             @endforeach --}}
             {{-- Fim Teste --}}
 
+            <div class="flex space-x-3">
+                {{-- Pesquisar estudante --}}
+                <form action="{{route('emprestimos.index')}}" method="get">
+                    <div class="w-full flex justify-end items-center relative">
+                        <input
+                            class="flex appearance-none block w-full bg-white text-grey-darker border rounded py-2 px-2 pr-10 leading-tight focus:outline-none focus:bg-white-500 focus:border-gray-600 border-gray-200"
+                            type="text"
+                            placeholder="Pesquisar por estudante..."
+                            name="pesquisar"
+                            id="pesquisar"
+                            value="{{request()->pesquisar}}"
+                        >
+                        @if (isset($aviso) && $aviso == true)
+                            {{-- Filtro ativado --}}
+                            <a href="{{route('emprestimos.index')}}" class="absolute p-2" title="Sair do filtro">
+                                <i class="fas fa-search text-red-500"></i>
+                            </a>
+                        @else
+                            {{-- Filtro não ativado --}}
+                            <button class="absolute p-2">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        @endif
 
-            <div title="Cadastrar empréstimo">
-                <button data-modal="centeredFormModal" class="modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded">
+                    </div>
+                </form>
+
+                <button data-modal="centeredFormModal" class="modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded" title="Cadastrar empréstimo">
                     <i class="fas fa-plus"></i>
                 </button>
             </div>
@@ -85,13 +110,10 @@
                                         @endif
                                     </td>
                                     <td class="border px-4 py-2 text-center">
-                                        <a href="#" title="Ver" class="bg-teal-300 cursor-pointer rounded-md p-1.5 mx-1 text-white">
-                                                <i class="fas fa-eye sm:my-2.5"></i></a>
-                                        <a href="#" title="Editar" class="bg-teal-300 cursor-pointer rounded-md p-1.5 mx-1 text-white">
-                                                <i class="fas fa-edit sm:my-2.5"></i></a>
-                                        <a title="Excluir" class="bg-teal-300 cursor-pointer rounded-md p-1.5 mx-1 text-red-500">
-                                                <i class="fas fa-trash sm:my-2.5"></i>
-                                        </a>
+                                        {{-- <a href="#" title="Ver" class="bg-teal-300 cursor-pointer rounded-md p-1.5 mx-1 text-white">
+                                            <i class="fas fa-eye sm:my-2.5"></i></a> --}}
+                                        <a href="{{route('emprestimos.destroy', $livro->pivot->id)}}" title="Devolver livro" class="bg-teal-300 cursor-pointer rounded-md p-1.5 mx-1 text-white">
+                                            <i class="fas fa-book sm:my-2.5"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

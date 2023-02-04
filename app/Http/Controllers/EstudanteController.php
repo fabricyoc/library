@@ -36,11 +36,13 @@ class EstudanteController extends Controller
             $user->fill($request->except(['logradouro', 'numero', 'bairro', 'referencia']));
             $user->save();
 
-            // $request['cidade'] = "Caicó";
-            // $request['cep'] = "59300-000";
-            $endereco->fill($request->except(['name', 'cpf', 'email', 'telephone']));
-            $user->endereco()->save($endereco);
-
+            if ($request->logradouro != null && $request->numero != null)
+            {
+                // $request['cidade'] = "Caicó";
+                // $request['cep'] = "59300-000";
+                $endereco->fill($request->except(['name', 'cpf', 'email', 'telephone']));
+                $user->endereco()->save($endereco);
+            }
 
             return Redirect::route('estudantes.index');
         }
@@ -50,7 +52,7 @@ class EstudanteController extends Controller
         }
     }
 
-    public function show(UserStoreRequest $user)
+    public function show(User $user)
     {
         dd('chegou ao SHOW do estudante');
     }
@@ -103,13 +105,16 @@ class EstudanteController extends Controller
             //
             // início do update do endereço do user
             //
+            // se não tiver cadastrado o endereço previamente, daria erro - pois não existiria $user->endereco
+            $comprovante = ($user->endereco != null) ? $user->endereco->comprovante : $request->comprovante;
+
             $inputsEndereco = [
                 'logradouro' => $request->logradouro,
                 'numero' => $request->numero,
                 'bairro' => $request->bairro,
                 'cidade' => $request->cidade,
                 'cep' => $request->cep,
-                'comprovante' => $this->inserirImagem($request['comprovante'], 'comprovantes', $user->endereco->comprovante),
+                'comprovante' => $this->inserirImagem($request['comprovante'], 'comprovantes', $comprovante),
                 'referencia' => $request->referencia,
             ];
             // if ($request->comprovante == null) {
@@ -118,7 +123,7 @@ class EstudanteController extends Controller
             foreach ($inputsEndereco as $key => $value)
             {
                 // Remove do array toda CHAVE com valor NULL
-                if ($value == null)
+                if ($value == null || !isset($value))
                 {
                     unset($inputsEndereco[$key]);
                 }
@@ -148,9 +153,18 @@ class EstudanteController extends Controller
         }
     }
 
-    public function destroy(User $user)
+    public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        if($user->endereco->comprovante != null){
+            Storage::disk('public')->delete($user->endereco->comprovante ?? '');
+        }
+        if($user->photo != null){
+            Storage::disk('public')->delete($user->photo ?? '');
+        }
+        $user->delete();
+
+        return Redirect::route('estudantes.index');
     }
 
     private function senhasIguais($password, $confirmPassword)

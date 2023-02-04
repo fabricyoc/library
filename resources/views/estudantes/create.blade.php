@@ -201,3 +201,6 @@
         </div>
     </div>
 </div>
+@push('scripts')
+    <script src="{{asset('js/logradouro.js')}}"></script>
+@endpush

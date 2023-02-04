@@ -10,9 +10,11 @@ let mix = require('laravel-mix');
 //   ]);
 
 mix.js("resources/js/app.js", "public/js")
-  .postCss("resources/css/all.css", "public/css")
-  .postCss("resources/css/styles.css", "public/css")
-  .postCss("resources/css/app.css", "public/css");
+    .js("resources/js/logradouro.js", "public/js") // teste
+
+    .postCss("resources/css/all.css", "public/css")
+    .postCss("resources/css/styles.css", "public/css")
+    .postCss("resources/css/app.css", "public/css");
 
 mix.options({
     postCss: [

@@ -450,13 +450,20 @@
                     </div>
 
                     {{-- Botões --}}
-                    <div class="mt-3">
-                        <button type="submit" class='bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-4 rounded'>
-                            Editar
-                        </button>
-                        <a href="{{ route('estudantes.index') }}">
-                            <input type="button" value="Voltar" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer">
-                        </a>
+                    <div class="mt-3 flex justify-between">
+                        <div>
+                            <button type="submit" class='bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-4 rounded'>
+                                Editar
+                            </button>
+                            <a href="{{ route('estudantes.index') }}">
+                                <input type="button" value="Voltar" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer">
+                            </a>
+                        </div>
+                        <div>
+                            <a href="{{ route('estudantes.destroy', $user->id) }}">
+                                <input type="button" value="Excluir" class='bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-4 rounded cursor-pointer' title="Essa ação excluirá o registro do estudante">
+                            </a>
+                        </div>
                     </div>
                 {{-- </form> --}}
             </div>

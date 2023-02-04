@@ -78,12 +78,14 @@
                                         </a>
                                     @endif
                                 </td>
-                                <td class="border px-4 py-2 text-center">
-                                    <a href="#" title="Ver" class="bg-teal-300 cursor-pointer rounded-md p-1.5 mx-1 text-white">
-                                            <i class="fas fa-eye sm:my-2.5"></i></a>
-                                    <a href="{{route('estudantes.edit', $e->id)}}" title="Editar" class="bg-teal-300 cursor-pointer rounded-md p-1.5 mx-1 text-white">
-                                            <i class="fas fa-edit sm:my-2.5"></i></a>
-                                    <a title="Excluir" class="bg-teal-300 cursor-pointer rounded-md p-1.5 mx-1 text-red-500">
+                                <td class="border px-4 py-4 sm:space-y-1 sm:space-x-1 text-center">
+                                    <a href="{{route('estudantes.show', $e->id)}}" title="Ver" class="bg-teal-300 cursor-pointer rounded-md p-1.5 text-white">
+                                            <i class="fas fa-eye sm:my-2.5"></i>
+                                    </a>
+                                    <a href="{{route('estudantes.edit', $e->id)}}" title="Editar" class="bg-teal-300 cursor-pointer rounded-md p-1.5 text-white">
+                                            <i class="fas fa-edit sm:my-2.5"></i>
+                                    </a>
+                                    <a title="Excluir" class="bg-teal-300 cursor-pointer rounded-md p-1.5 text-red-500">
                                             <i class="fas fa-trash sm:my-2.5"></i>
                                     </a>
                                 </td>
@@ -101,6 +103,6 @@
 
 {{-- Modal create --}}
 @include('estudantes.create')
-{{-- /Modal create --}}
+{{-- /Modal create--}}
 
 @endsection

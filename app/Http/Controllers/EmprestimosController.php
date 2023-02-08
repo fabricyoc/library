@@ -18,7 +18,7 @@ class EmprestimosController extends Controller
         $livros = Livro::where('emprestimo', '>', 0)->orderBy('titulo')->get();
 
         // Sem aviso sobre o filtro
-        $aviso = false;
+        $aviso = false; // lupa vermelha
 
         // Inicializar variável
         $estudantes_com_livros = '';
@@ -33,23 +33,42 @@ class EmprestimosController extends Controller
             $estudantes_com_livros->when($request->pesquisar, function($query, $vl) {
                 $query->where('name', 'like', '%'. $vl. '%');
             });
+            dd($estudantes_com_livros->toArray());
 
             $estudantes_com_livros = $estudantes_com_livros->get();
+
             $aviso = true;
         }
         // Sem filtro :: index padrão
         else
         {
             $livros_users = LivroUser::orderBy('devolucao')->get();
+            // $livros_users = LivroUser::all();
+
             $estudantes_com_livros = [];
+
             foreach ($livros_users as $lu)
             {
                 $estudante = User::find($lu->user_id);
-                array_push($estudantes_com_livros, $estudante);
+                $livro = Livro::find($lu->livro_id);
+
+
+                // Teste
+                // if(!in_array($estudante, $estudantes_com_livros))
+                // {
+                //     // Verificar se já há um usuário no array,pois irá retornar todos os livros de um usuário
+                //     array_push($estudantes_com_livros, $estudante);
+                // }
+                // Teste
+
+                // array_push($estudantes_com_livros, $estudante);
+                array_push($estudantes_com_livros, [
+                    'estudante' => $estudante,
+                    'livro' => $livro,
+                    'emprestimo' => $lu
+                ]);
             }
         }
-
-
 
         return view('emprestimos.index', compact('estudantes', 'livros', 'aviso', 'estudantes_com_livros'));
     }
@@ -96,49 +115,74 @@ class EmprestimosController extends Controller
     // public function update(Request $request, $id)
     public function update($id)
     {
+        $nova_data_devolucao = date('Y-m-d', strtotime('+15 days')); // data atual + 15d
+
+        LivroUser::find($id)->update([
+            'renovacao' => true,
+            'devolucao' => $nova_data_devolucao
+        ]);
+
+        return Redirect::route('emprestimos.index');
+
         // Renovar livro
-        $users = User::where('type', '=', 'common')->get();
+        // $users = User::where('type', '=', 'common')->get();
 
-        foreach ($users as $user)
-        {
-            foreach ($user->livros as $user_livro)
-            {
-                if($user_livro->pivot->id == $id)
-                {
-                    // $nova_data_devolucao = date('Y-m-d', strtotime('+15 days', strtotime($user_livro->pivot->devolucao)));
-                    $nova_data_devolucao = date('Y-m-d', strtotime('+15 days'));
+        // foreach ($users as $user)
+        // {
+        //     foreach ($user->livros as $user_livro)
+        //     {
+        //         if($user_livro->pivot->id == $id)
+        //         {
+        //             // $nova_data_devolucao = date('Y-m-d', strtotime('+15 days', strtotime($user_livro->pivot->devolucao)));
+        //             $nova_data_devolucao = date('Y-m-d', strtotime('+15 days'));
 
-                    $user_livro->pivot->renovacao = true;
-                    $user_livro->pivot->devolucao = $nova_data_devolucao;
-                    $user_livro->pivot->save();
+        //             $user_livro->pivot->renovacao = true;
+        //             $user_livro->pivot->devolucao = $nova_data_devolucao;
+        //             $user_livro->pivot->save();
 
-                    return Redirect::route('emprestimos.index');
-                }
-            }
-        }
+        //             return Redirect::route('emprestimos.index');
+        //         }
+        //     }
+        // }
     }
 
+    // Entregar livro
     public function destroy($id)
     {
-        // Entregar livro
-        $users = User::where('type', '=', 'common')->get();
+        // Busca o relacionamento entre usuário e livro
+        $emprestimo = LivroUser::find($id);
 
-        foreach ($users as $user)
-        {
-            foreach ($user->livros as $user_livro)
-            {
-                if($user_livro->pivot->id == $id)
-                {
-                    // Aumenta 1 no estoque de empréstimos
-                    $user_livro->emprestimo++;
-                    $user_livro->save();
+        // Busca o livro para atribuir +1 ao empréstimo (estoque)
+        $livro = Livro::find($emprestimo->livro_id);
 
-                    // Deleta o relacionamento entre usuário e o livro
-                    $user_livro->pivot->delete();
+        // Aumenta 1 no estoque de Livro devolvido
+        $livro->emprestimo += 1;
+        $livro->save();
 
-                    return Redirect::route('emprestimos.index');
-                }
-            }
-        }
+        // Deleta o relacionamento entre usuário e o livro
+        $emprestimo->delete();
+
+        return Redirect::route('emprestimos.index');
+
+
+        // $users = User::where('type', '=', 'common')->get();
+
+        // foreach ($users as $user)
+        // {
+        //     foreach ($user->livros as $user_livro)
+        //     {
+        //         if($user_livro->pivot->id == $id)
+        //         {
+        //             // Aumenta 1 no estoque de empréstimos
+        //             $user_livro->emprestimo++;
+        //             $user_livro->save();
+
+        //             // Deleta o relacionamento entre usuário e o livro
+        //             $user_livro->pivot->delete();
+
+        //             return Redirect::route('emprestimos.index');
+        //         }
+        //     }
+        // }
     }
 }

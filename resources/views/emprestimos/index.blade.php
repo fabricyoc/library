@@ -81,45 +81,39 @@
                   </tr>
                 </thead>
                 <tbody>
-                    {{-- @foreach ($estudantes as $e) --}}
-                    @foreach ($estudantes_com_livros as $e)
-                        @if (!empty($e->livros))
-                            @foreach ($e->livros as $livro)
+                    {{-- O código era aqui --}}
+                    @foreach ($estudantes_com_livros as $el)
+                        {{-- {{dd($el)}} --}}
+                        <tr>
+                            <td class="border px-4 py-2">{{ucwords($el['estudante']->name)}}</td>
+                            <td class="border px-4 py-2">{{ucwords($el['livro']->titulo)}}</td>
+                            <td class="border px-4 py-2">{{date('d/m/Y', strtotime($el['emprestimo']->created_at))}}</td>
+                            <td class="border px-4 py-2">{{date('d/m/Y', strtotime($el['emprestimo']->devolucao))}}</td>
+                            {{-- Renovação --}}
+                            <td class="border px-4 py-2 text-center">
+                                @if ($el['emprestimo']->renovacao == false)
+                                    <form action="{{route('emprestimos.update', $el['emprestimo']->id)}}" method="post">
+                                        @csrf
+                                        @method('put')
 
-                            {{-- Renovar por mais 15 dias --}}
-                            {{-- {{date('d/m/Y', strtotime('+15 days', strtotime($livro->pivot->devolucao)))}} --}}
-
-                                <tr>
-                                    <td class="border px-4 py-2">{{ucwords($e->name)}}</td>
-                                    <td class="border px-4 py-2">{{ucwords($livro->titulo)}}</td>
-                                    {{-- Data de empréstimo --}}
-                                    <td class="border px-4 py-2">{{date('d/m/Y', strtotime($livro->pivot->created_at))}}</td>
-                                    {{-- Data de devolução --}}
-                                    <td class="border px-4 py-2">{{date('d/m/Y', strtotime($livro->pivot->devolucao))}}</td>
-                                    <td class="border px-4 py-2 text-center">
-                                        @if ($livro->pivot->renovacao == false)
-                                            <form action="{{route('emprestimos.update', $livro->pivot->id)}}" method="post">
-                                                @csrf
-                                                @method('put')
-
-                                                <button>
-                                                    <i class="fas fa-check text-green-500 mx-2" title="Renovar por mais 15 dias"></i>
-                                                </button>
-                                            </form>
-                                        @else
-                                            <i class="fas fa-times text-red-500 mx-2" title="Já houve renovação"></i>
-                                        @endif
-                                    </td>
-                                    <td class="border px-4 py-2 text-center">
-                                        {{-- <a href="#" title="Ver" class="bg-teal-300 cursor-pointer rounded-md p-1.5 mx-1 text-white">
-                                            <i class="fas fa-eye sm:my-2.5"></i></a> --}}
-                                        <a href="{{route('emprestimos.destroy', $livro->pivot->id)}}" title="Devolver livro" class="bg-teal-300 cursor-pointer rounded-md p-1.5 mx-1 text-white">
-                                            <i class="fas fa-book sm:my-2.5"></i></a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        @endif
+                                        <button>
+                                            <i class="fas fa-check text-green-500 mx-2" title="Renovar por mais 15 dias"></i>
+                                        </button>
+                                    </form>
+                                @else
+                                    <i class="fas fa-times text-red-500 mx-2" title="Já houve renovação"></i>
+                                @endif
+                            </td>
+                            {{-- Ações --}}
+                            <td class="border px-4 py-2 text-center">
+                                {{-- <a href="#" title="Ver" class="bg-teal-300 cursor-pointer rounded-md p-1.5 mx-1 text-white">
+                                    <i class="fas fa-eye sm:my-2.5"></i></a> --}}
+                                <a href="{{route('emprestimos.destroy', $el['emprestimo']->id)}}" title="Devolver livro" class="bg-teal-300 cursor-pointer rounded-md p-1.5 mx-1 text-white">
+                                    <i class="fas fa-book sm:my-2.5"></i></a>
+                            </td>
+                        </tr>
                     @endforeach
+                    {{-- /O código era aqui --}}
                 </tbody>
             </table>
         </div>

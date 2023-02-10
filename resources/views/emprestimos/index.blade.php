@@ -19,8 +19,8 @@
 <div class="flex flex-1  flex-col md:flex-row lg:flex-row mx-4 mt-2">
     <div class="mb-2 border-solid border-gray-300 rounded border shadow-sm w-full">
         <div class="bg-gray-200 px-2 py-3 border-solid border-gray-200 border-b flex justify-between">
-            <div >
-                Full table
+            <div class="text-gray-600">
+                Todos os empréstimos
             </div>
 
             <div class="flex space-x-3">
@@ -71,7 +71,11 @@
                     {{-- Filtro desativado --}}
                     @foreach ($estudantes_com_livros as $el)
                         <tr>
-                            <td class="border px-4 py-2">{{ucwords($el['estudante']->name)}}</td>
+                            <td class="border px-4 py-2">
+                                <a class="hover:underline hover:underline-offset-4 hover:text-blue-400" href="{{ route('estudantes.show', $el['estudante']->id) }}">
+                                    {{ucwords($el['estudante']->name)}}
+                                </a>
+                            </td>
                             <td class="border px-4 py-2">{{ucwords($el['livro']->titulo)}}</td>
                             <td class="border px-4 py-2">{{date('d/m/Y', strtotime($el['emprestimo']->created_at))}}</td>
                             <td class="border px-4 py-2">{{date('d/m/Y', strtotime($el['emprestimo']->devolucao))}}</td>

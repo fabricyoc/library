@@ -19,8 +19,8 @@
 <div class="flex flex-1  flex-col md:flex-row lg:flex-row mx-4 mt-2">
     <div class="mb-2 border-solid border-gray-300 rounded border shadow-sm w-full">
         <div class="bg-gray-200 px-2 py-3 border-solid border-gray-200 border-b flex justify-between">
-            <div >
-                Full table
+            <div class="text-gray-600">
+                Todos os leitores
             </div>
             <div title="Cadastrar estudante">
                 {{-- <button data-modal="centeredFormModal" class="bg-green-400 hover:bg-green-600 hover:shadow cursor-pointer rounded text-white p-1 mx-1"> --}}

@@ -52,9 +52,13 @@ class EstudanteController extends Controller
         }
     }
 
-    public function show(User $user)
+    public function show(User $user, $id)
     {
-        dd('chegou ao SHOW do estudante');
+        $user = User::find($id);
+
+        return view('estudantes.show', [
+            'user' => $user
+        ]);
     }
 
     public function edit($id)

@@ -4,10 +4,16 @@
 <!-- Stats Row Starts Here -->
 <div class="flex flex-1 flex-col md:flex-row lg:flex-row mx-2">
     <div class="shadow-lg bg-red-vibrant border-l-8 hover:bg-red-vibrant-dark border-red-vibrant-dark mb-2 p-2 md:w-full mx-2">
-        <div class="p-4 flex flex-col">
-            <a href="#" class="no-underline text-white text-2xl font-bold">
+        <div class="p-4 flex justify-between">
+            <div class="no-underline text-white text-2xl font-bold">
                 Estudantes
-            </a>
+            </div>
+            <div class="no-underline text-white text-2xl font-bold">
+                ~
+            </div>
+            <div class="no-underline text-white text-2xl font-bold" title="Editar dados do estudante">
+                Editar
+            </div>
         </div>
     </div>
 </div>

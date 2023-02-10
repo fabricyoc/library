@@ -23,19 +23,6 @@
                 Full table
             </div>
 
-            {{-- Teste --}}
-            {{-- dd(empty($estudantes[2]->livros)); --}}
-
-            {{-- @foreach ($estudantes as $e)
-                <br>
-                {{$e->name}}
-
-                @foreach ($e->livros as $livro)
-                {{$livro->pivot->user_id}}
-                @endforeach
-            @endforeach --}}
-            {{-- Fim Teste --}}
-
             <div class="flex space-x-3">
                 {{-- Pesquisar estudante --}}
                 <form action="{{route('emprestimos.index')}}" method="get">
@@ -81,9 +68,8 @@
                   </tr>
                 </thead>
                 <tbody>
-                    {{-- O código era aqui --}}
+                    {{-- Filtro desativado --}}
                     @foreach ($estudantes_com_livros as $el)
-                        {{-- {{dd($el)}} --}}
                         <tr>
                             <td class="border px-4 py-2">{{ucwords($el['estudante']->name)}}</td>
                             <td class="border px-4 py-2">{{ucwords($el['livro']->titulo)}}</td>
@@ -113,7 +99,7 @@
                             </td>
                         </tr>
                     @endforeach
-                    {{-- /O código era aqui --}}
+                    {{-- Filtro desativado --}}
                 </tbody>
             </table>
         </div>

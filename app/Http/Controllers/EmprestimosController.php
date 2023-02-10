@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
+use function PHPSTORM_META\map;
+
 class EmprestimosController extends Controller
 {
     public function index(Request $request)
@@ -21,21 +23,27 @@ class EmprestimosController extends Controller
         $aviso = false; // lupa vermelha
 
         // Inicializar variável
-        $estudantes_com_livros = '';
+        $estudantes_com_livros = [];
 
         // Filtro de estudantes
         if ($request->pesquisar != null)
         {
-            // $estudantes = User::query();
-            $estudantes_com_livros = User::query();
+            $livros_users = LivroUser::orderBy('devolucao')->get();
 
-            // $estudantes->when($request->pesquisar, function($query, $vl) {
-            $estudantes_com_livros->when($request->pesquisar, function($query, $vl) {
-                $query->where('name', 'like', '%'. $vl. '%');
-            });
-            dd($estudantes_com_livros->toArray());
+            foreach ($livros_users as $lu)
+            {
+                $estudante = User::find($lu->user_id);
 
-            $estudantes_com_livros = $estudantes_com_livros->get();
+                if (str_contains(strtolower($estudante->name), strtolower($request->pesquisar)))
+                {
+                    $livro = Livro::find($lu->livro_id);
+                    array_push($estudantes_com_livros, [
+                        'estudante' => $estudante,
+                        'livro' => $livro,
+                        'emprestimo' => $lu
+                    ]);
+                }
+            }
 
             $aviso = true;
         }
@@ -67,8 +75,10 @@ class EmprestimosController extends Controller
                     'livro' => $livro,
                     'emprestimo' => $lu
                 ]);
+
             }
         }
+
 
         return view('emprestimos.index', compact('estudantes', 'livros', 'aviso', 'estudantes_com_livros'));
     }

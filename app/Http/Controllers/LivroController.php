@@ -34,12 +34,12 @@ class LivroController extends Controller
 
     public function edit(Livro $livro)
     {
-        dd($livro);
+        return view('livros.edit', compact('livro'));
     }
 
     public function update(UpdateLivroRequest $request, Livro $livro)
     {
-        //
+        dd('estou no update');
     }
 
     public function destroy(Livro $livro)

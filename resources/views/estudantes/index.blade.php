@@ -48,6 +48,7 @@
 
                     </div>
                 </form>
+                {{-- Pesquisar estudante --}}
 
                 {{-- <button data-modal="centeredFormModal" class="bg-green-400 hover:bg-green-600 hover:shadow cursor-pointer rounded text-white p-1 mx-1"> --}}
                 <button data-modal="centeredFormModal" class="modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded" title="Cadastrar estudante">

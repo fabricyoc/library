@@ -20,7 +20,7 @@
             </div>
         </a>
 
-        <a href="#" class="shadow bg-warning border-l-8 hover:bg-warning-dark border-warning-dark mb-2 p-2 md:w-1/4 mx-2">
+        <a href="{{route('livros.index')}}" class="shadow bg-warning border-l-8 hover:bg-warning-dark border-warning-dark mb-2 p-2 md:w-1/4 mx-2">
             <div class="p-4 flex flex-col no-underline text-white text-2xl">
                 Livros
             </div>

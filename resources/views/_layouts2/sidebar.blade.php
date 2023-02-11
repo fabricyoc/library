@@ -39,8 +39,13 @@
                 <span><i class="fa fa-angle-right float-right"></i></span>
             </a>
         </li>
-        <li class="w-full h-full py-3 px-2 border-b border-light-border">
-            <a href="tables.html"
+        <li @if (str_contains(Request::url(), 'http://localhost:8000/dashboard/livros'))
+                class="w-full h-full py-3 px-2 border-b border-light-border bg-white"
+            @else
+                class="w-full h-full py-3 px-2 border-b border-light-border"
+            @endif
+        >
+            <a href="{{route('livros.index')}}"
                class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">
                 {{-- <i class="fas fa-table float-left mx-2"></i> --}}
                 <i class="fas fa-book float-left mx-2"></i>

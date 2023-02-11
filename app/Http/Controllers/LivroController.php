@@ -8,9 +8,13 @@ use App\Models\Livro;
 
 class LivroController extends Controller
 {
-    public function index()
+    public function index(Livro $livros)
     {
-        dd(Livro::all()->toArray());
+        $livros = Livro::orderBy('titulo')->get();
+
+        return view('livros.index', [
+            'livros' => $livros
+        ]);
     }
 
     public function create()
@@ -30,7 +34,7 @@ class LivroController extends Controller
 
     public function edit(Livro $livro)
     {
-        //
+        dd($livro);
     }
 
     public function update(UpdateLivroRequest $request, Livro $livro)

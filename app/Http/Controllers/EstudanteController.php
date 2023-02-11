@@ -12,12 +12,30 @@ use Illuminate\Support\Facades\Storage;
 
 class EstudanteController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $estudantes = User::where('type', '=', 'common')->orderBy('name')->get();
 
+        // Filtro
+        $aviso = '';
+        if ($request->pesquisar != null)
+        {
+            $estudantes = User::query();
+
+            $estudantes->when($request->pesquisar, function($query, $vl) {
+                $query->where('name', 'like', '%'. $vl. '%')
+                    ->where('type', '=', 'common')->orderBy('name');
+            });
+
+            $estudantes = $estudantes->get();
+
+            $aviso = true;
+        }
+        // Filtro
+
         return view('estudantes.index', [
-            'estudantes' => $estudantes
+            'estudantes' => $estudantes,
+            'aviso' => $aviso
         ]);
     }
 

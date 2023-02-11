@@ -22,9 +22,35 @@
             <div class="text-gray-600">
                 Todos os leitores
             </div>
-            <div title="Cadastrar estudante">
+            <div class="flex space-x-3">
+                {{-- Pesquisar estudante --}}
+                <form action="{{route('estudantes.index')}}" method="get">
+                    <div class="w-full flex justify-end items-center relative">
+                        <input
+                            class="flex appearance-none block w-full bg-white text-grey-darker border rounded py-2 px-2 pr-10 leading-tight focus:outline-none focus:bg-white-500 focus:border-gray-600 border-gray-200"
+                            type="text"
+                            placeholder="Pesquisar estudante..."
+                            name="pesquisar"
+                            id="pesquisar"
+                            value="{{request()->pesquisar}}"
+                        >
+                        @if (isset($aviso) && $aviso == true)
+                            {{-- Filtro ativado --}}
+                            <a href="{{route('estudantes.index')}}" class="absolute p-2" title="Sair do filtro">
+                                <i class="fas fa-search text-red-500"></i>
+                            </a>
+                        @else
+                            {{-- Filtro não ativado --}}
+                            <button class="absolute p-2">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        @endif
+
+                    </div>
+                </form>
+
                 {{-- <button data-modal="centeredFormModal" class="bg-green-400 hover:bg-green-600 hover:shadow cursor-pointer rounded text-white p-1 mx-1"> --}}
-                <button data-modal="centeredFormModal" class="modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded">
+                <button data-modal="centeredFormModal" class="modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded" title="Cadastrar estudante">
                     <i class="fas fa-plus"></i>
                     {{-- Cadastrar estudante --}}
                 </button>

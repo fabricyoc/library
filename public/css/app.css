@@ -754,9 +754,6 @@ video {
 .flex-nowrap {
   flex-wrap: nowrap;
 }
-.content-between {
-  align-content: space-between;
-}
 .items-center {
   align-items: center;
 }
@@ -1111,10 +1108,6 @@ video {
 .text-red-900 {
   --tw-text-opacity: 1;
   color: rgb(127 29 29 / var(--tw-text-opacity));
-}
-.text-red-300 {
-  --tw-text-opacity: 1;
-  color: rgb(252 165 165 / var(--tw-text-opacity));
 }
 .text-red-600 {
   --tw-text-opacity: 1;

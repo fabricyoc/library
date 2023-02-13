@@ -62,7 +62,7 @@
                     <th class="border w-1/4 px-4 py-2">Título</th>
                     <th class="border w-1/4 px-4 py-2">Autor</th>
                     <th class="border w-1/4 px-4 py-2">Assunto</th>
-                    <th class="border w-1/7 px-4 py-2">Acervo</th>
+                    <th class="border w-1/7 px-4 py-2" title="Total de livros no estoque">Acervo</th>
                     <th class="border w-1/7 px-4 py-2" title="Total de livros emprestados">Empres.</th>
                     <th class="border w-1/6 px-4 py-2">Ações</th>
                   </tr>
@@ -72,8 +72,8 @@
                             <td class="border px-4 py-2">{{ucwords($livro->titulo)}}
                             <td class="border px-4 py-2">{{ucwords($livro->autor)}}
                             <td class="border px-4 py-2">{{ucwords($livro->assunto)}}
-                            <td class="border px-4 py-2">{{$livro->totLivro}}
-                            <td class="border px-4 py-2" title="Total de livros emprestados">{{$livro->totLivro - $livro->emprestimo}}
+                            <td class="border px-4 py-2" title="Total de livros no estoque">{{$livro->totLivro}}
+                            <td class="border px-4 py-2" title="Total de livros emprestados">{{$livro->emprestimo}}
                             <td class="border px-4 py-4 sm:space-y-1 sm:space-x-1 text-center">
                                 <a href="" title="Ver" class="bg-teal-300 cursor-pointer rounded-md p-1.5 text-white">
                                     <i class="fas fa-eye sm:my-2.5"></i>

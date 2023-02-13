@@ -17,7 +17,9 @@ class EmprestimosController extends Controller
         $estudantes = User::where('type', '=', 'common')->orderBy('name')->get();
 
         // exibirá apenas os livros que estão em estoque
-        $livros = Livro::where('emprestimo', '>', 0)->orderBy('titulo')->get();
+        // $livros = Livro::where('emprestimo', '<', 'totLivro')->orderBy('titulo')->get();
+        $livros = Livro::whereColumn('emprestimo', '<', 'totLivro')->orderBy('titulo')->get();
+
 
         // Sem aviso sobre o filtro
         $aviso = false; // lupa vermelha
@@ -93,7 +95,8 @@ class EmprestimosController extends Controller
         $user = User::find($request->estudante);
         $livro = Livro::find($request->livro);
 
-        if ($livro->emprestimo > 0)
+        // if ($livro->emprestimo > 0)
+        if ($livro->emprestimo <= $livro->totLivro)
         {
             $user->livros()->attach($livro->id, [
                 'created_at' => date('Y-m-d H:i:s'), // data de empréstimo
@@ -102,7 +105,10 @@ class EmprestimosController extends Controller
             ]);
 
             //subtrai 1 livro do emprestimo/estoque disponível
-            $livro->emprestimo--;
+            // $livro->emprestimo--;
+
+            // adiciona 1 livro aos empréstimos
+            $livro->emprestimo++;
             $livro->save();
         }
 
@@ -166,7 +172,9 @@ class EmprestimosController extends Controller
         $livro = Livro::find($emprestimo->livro_id);
 
         // Aumenta 1 no estoque de Livro devolvido
-        $livro->emprestimo += 1;
+        // $livro->emprestimo += 1;
+        // Subtrai 1 no estoque de empréstimos
+        $livro->emprestimo -= 1;
         $livro->save();
 
         // Deleta o relacionamento entre usuário e o livro

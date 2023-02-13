@@ -253,7 +253,7 @@
                             <button type="submit" class='bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-4 rounded'>
                                 Editar
                             </button>
-                            <a href="">
+                            <a href="{{route('livros.index')}}">
                                 <input type="button" value="Voltar" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer">
                             </a>
                         </div>

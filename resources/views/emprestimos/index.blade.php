@@ -57,54 +57,61 @@
         </div>
         <div class="p-3">
             <table class="table-responsive w-full rounded">
-                <thead>
-                  <tr>
-                    <th class="border w-1/4 px-4 py-2">Estudante</th>
-                    <th class="border w-1/4 px-4 py-2">Livro</th>
-                    <th class="border w-1/6 px-4 py-2">Data do empréstimo</th>
-                    <th class="border w-1/6 px-4 py-2">Devolução</th>
-                    <th class="border w-1/8 px-4 py-2" title="É possível renovar?">Renovação</th>
-                    <th class="border w-1/6 px-6 py-2">Ações</th>
-                  </tr>
-                </thead>
-                <tbody>
-                    {{-- Filtro desativado --}}
-                    @foreach ($estudantes_com_livros as $el)
+                @if (empty($estudantes_com_livros))
+                    <div class="py-4 text-red-600 text-center hover:tracking-wider">
+                        Nenhum empréstimo registrado
+                    </div>
+                @else
+                    <thead>
                         <tr>
-                            <td class="border px-4 py-2">
-                                <a class="hover:underline hover:underline-offset-4 hover:text-blue-400" href="{{ route('estudantes.show', $el['estudante']->id) }}">
-                                    {{ucwords($el['estudante']->name)}}
-                                </a>
-                            </td>
-                            <td class="border px-4 py-2">{{ucwords($el['livro']->titulo)}}</td>
-                            <td class="border px-4 py-2">{{date('d/m/Y', strtotime($el['emprestimo']->created_at))}}</td>
-                            <td class="border px-4 py-2">{{date('d/m/Y', strtotime($el['emprestimo']->devolucao))}}</td>
-                            {{-- Renovação --}}
-                            <td class="border px-4 py-2 text-center">
-                                @if ($el['emprestimo']->renovacao == false)
-                                    <form action="{{route('emprestimos.update', $el['emprestimo']->id)}}" method="post">
-                                        @csrf
-                                        @method('put')
-
-                                        <button>
-                                            <i class="fas fa-check text-green-500 mx-2" title="Renovar por mais 15 dias"></i>
-                                        </button>
-                                    </form>
-                                @else
-                                    <i class="fas fa-times text-red-500 mx-2" title="Já houve renovação"></i>
-                                @endif
-                            </td>
-                            {{-- Ações --}}
-                            <td class="border px-4 py-2 text-center">
-                                {{-- <a href="#" title="Ver" class="bg-teal-300 cursor-pointer rounded-md p-1.5 mx-1 text-white">
-                                    <i class="fas fa-eye sm:my-2.5"></i></a> --}}
-                                <a href="{{route('emprestimos.destroy', $el['emprestimo']->id)}}" title="Devolver livro" class="bg-teal-300 cursor-pointer rounded-md p-1.5 mx-1 text-white">
-                                    <i class="fas fa-book sm:my-2.5"></i></a>
-                            </td>
+                            <th class="border w-1/4 px-4 py-2">Estudante</th>
+                            <th class="border w-1/4 px-4 py-2">Livro</th>
+                            <th class="border w-1/6 px-4 py-2">Data do empréstimo</th>
+                            <th class="border w-1/6 px-4 py-2">Devolução</th>
+                            <th class="border w-1/8 px-4 py-2" title="É possível renovar?">Renovação</th>
+                            <th class="border w-1/6 px-6 py-2">Ações</th>
                         </tr>
-                    @endforeach
-                    {{-- Filtro desativado --}}
-                </tbody>
+                    </thead>
+                    <tbody>
+                        {{-- Filtro desativado --}}
+                        @foreach ($estudantes_com_livros as $el)
+                            <tr>
+                                <td class="border px-4 py-2">
+                                    <a class="hover:underline hover:underline-offset-4 hover:text-blue-400" href="{{ route('estudantes.show', $el['estudante']->id) }}">
+                                        {{ucwords($el['estudante']->name)}}
+                                    </a>
+                                </td>
+                                <td class="border px-4 py-2">{{ucwords($el['livro']->titulo)}}</td>
+                                <td class="border px-4 py-2">{{date('d/m/Y', strtotime($el['emprestimo']->created_at))}}</td>
+                                <td class="border px-4 py-2">{{date('d/m/Y', strtotime($el['emprestimo']->devolucao))}}</td>
+                                {{-- Renovação --}}
+                                <td class="border px-4 py-2 text-center">
+                                    @if ($el['emprestimo']->renovacao == false)
+                                        <form action="{{route('emprestimos.update', $el['emprestimo']->id)}}" method="post">
+                                            @csrf
+                                            @method('put')
+
+                                            <button>
+                                                <i class="fas fa-check text-green-500 mx-2" title="Renovar por mais 15 dias"></i>
+                                            </button>
+                                        </form>
+                                    @else
+                                        <i class="fas fa-times text-red-500 mx-2" title="Já houve renovação"></i>
+                                    @endif
+                                </td>
+                                {{-- Ações --}}
+                                <td class="border px-4 py-2 text-center">
+                                    {{-- <a href="#" title="Ver" class="bg-teal-300 cursor-pointer rounded-md p-1.5 mx-1 text-white">
+                                        <i class="fas fa-eye sm:my-2.5"></i></a> --}}
+                                    <a href="{{route('emprestimos.destroy', $el['emprestimo']->id)}}" title="Devolver livro" class="bg-teal-300 cursor-pointer rounded-md p-1.5 mx-1 text-white">
+                                        <i class="fas fa-book sm:my-2.5"></i></a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        {{-- Filtro desativado --}}
+                    </tbody>
+                @endif
+
             </table>
         </div>
     </div>

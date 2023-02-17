@@ -1125,6 +1125,10 @@ video {
   --tw-text-opacity: 1;
   color: rgb(220 38 38 / var(--tw-text-opacity));
 }
+.text-red-300 {
+  --tw-text-opacity: 1;
+  color: rgb(252 165 165 / var(--tw-text-opacity));
+}
 .underline {
   text-decoration-line: underline;
 }
@@ -1192,6 +1196,12 @@ video {
 }
 .hover\:tracking-widest:hover {
   letter-spacing: 0.1em;
+}
+.hover\:tracking-wide:hover {
+  letter-spacing: 0.025em;
+}
+.hover\:tracking-wider:hover {
+  letter-spacing: 0.05em;
 }
 .hover\:text-gray-900:hover {
   --tw-text-opacity: 1;

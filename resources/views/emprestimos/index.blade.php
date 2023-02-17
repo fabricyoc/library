@@ -30,7 +30,7 @@
                         <input
                             class="flex appearance-none block w-full bg-white text-grey-darker border rounded py-2 px-2 pr-10 leading-tight focus:outline-none focus:bg-white-500 focus:border-gray-600 border-gray-200"
                             type="text"
-                            placeholder="Pesquisar por estudante..."
+                            placeholder="Pesquisar por leitor..."
                             name="pesquisar"
                             id="pesquisar"
                             value="{{request()->pesquisar}}"

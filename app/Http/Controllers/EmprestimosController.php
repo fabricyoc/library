@@ -92,29 +92,37 @@ class EmprestimosController extends Controller
 
     public function store(Request $request)
     {
-        $user = User::find($request->estudante);
-        $livro = Livro::find($request->livro);
-
-        // if ($livro->emprestimo > 0)
-        if ($livro->emprestimo <= $livro->totLivro)
+        if ($request->estudante != null && $request->livro != null)
         {
-            $user->livros()->attach($livro->id, [
-                'created_at' => date('Y-m-d H:i:s'), // data de empréstimo
-                'updated_at' => date('Y-m-d H:i:s'), // data de empréstimo
-                'devolucao' => date('Y-m-d', strtotime('+15 days')), // data de devolução
-            ]);
+            $user = User::find($request->estudante);
+            $livro = Livro::find($request->livro);
 
-            //subtrai 1 livro do emprestimo/estoque disponível
-            // $livro->emprestimo--;
+            // if ($livro->emprestimo > 0)
+            if ($livro->emprestimo <= $livro->totLivro)
+            {
+                $user->livros()->attach($livro->id, [
+                    'created_at' => date('Y-m-d H:i:s'), // data de empréstimo
+                    'updated_at' => date('Y-m-d H:i:s'), // data de empréstimo
+                    'devolucao' => date('Y-m-d', strtotime('+15 days')), // data de devolução
+                ]);
 
-            // adiciona 1 livro aos empréstimos
-            $livro->emprestimo++;
-            $livro->save();
+                //subtrai 1 livro do emprestimo/estoque disponível
+                // $livro->emprestimo--;
+
+                // adiciona 1 livro aos empréstimos
+                $livro->emprestimo++;
+                $livro->save();
+            }
+
+
+            // dd($user->load('livros')->toArray());
+            return Redirect::route('emprestimos.index');
+        }
+        else
+        {
+            return redirect()->back();
         }
 
-
-        // dd($user->load('livros')->toArray());
-        return Redirect::route('emprestimos.index');
     }
 
     public function show($id)

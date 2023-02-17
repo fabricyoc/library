@@ -15,17 +15,17 @@
             <form id='form_id' class="w-full" method="post" action="{{route('emprestimos.store')}}">
                 @csrf
 
-                {{-- Linha 1 :: Estudante --}}
+                {{-- Linha 1 :: Leitor --}}
                 <div class="flex flex-wrap -mx-3 mb-2">
                     <div class="w-full md:w-full px-3 mb-1 md:mb-0">
                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-light mb-1" for="estudante">
-                            Estudante
+                            Leitor(a)
                         </label>
                         <div class="relative">
                             <select
                                 class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-2 pr-6 rounded leading-tight focus:outline-none focus:bg-white-500 focus:border-gray-600"
                                 id="estudante" name="estudante">
-                                    <option value="{{null}}">Selecione um estudante</option>
+                                    <option value="{{null}}">Selecione um(a) leitor(a)</option>
                                     @foreach ($estudantes as $e)
                                         <option value="{{$e->id}}">{{ucwords($e->name)}}</option>
                                     @endforeach
@@ -73,6 +73,7 @@
                     </div>
                 </div>
 
+                {{-- Botões --}}
                 <div class="mt-3">
                     <button class='bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-4 rounded'>Emprestar</button>
                     <span class='close-modal cursor-pointer bg-red-200 hover:bg-red-500 text-red-900 font-bold py-2 px-4 rounded'>

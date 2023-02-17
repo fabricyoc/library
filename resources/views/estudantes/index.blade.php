@@ -20,7 +20,7 @@
     <div class="mb-2 border-solid border-gray-300 rounded border shadow-sm w-full">
         <div class="bg-gray-200 px-2 py-3 border-solid border-gray-200 border-b flex justify-between">
             <div class="text-gray-600">
-                Todos os leitores
+                Todos os estudantes
             </div>
             <div class="flex space-x-3">
                 {{-- Pesquisar estudante --}}

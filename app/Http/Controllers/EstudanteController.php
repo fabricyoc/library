@@ -178,7 +178,7 @@ class EstudanteController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
-        if($user->endereco->comprovante != null){
+        if($user->endereco != null && $user->endereco->comprovante != null){
             Storage::disk('public')->delete($user->endereco->comprovante ?? '');
         }
         if($user->photo != null){

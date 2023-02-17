@@ -12,7 +12,7 @@
                 ~
             </div>
             <div class="no-underline text-white text-2xl font-bold" title="Editar dados do estudante">
-                Editar
+                Cadastrar
             </div>
         </div>
     </div>
@@ -20,28 +20,19 @@
 <!-- Stats Row Starts Here -->
 
 
-<form action="{{route('livros.update', $livro->id)}}" method="post" enctype="multipart/form-data">
+<form action="{{route('livros.store')}}" method="post" enctype="multipart/form-data">
     @csrf
-    @method('put')
-    <!--Grid form edit livro-->
+    <!--Grid form create livro-->
     <div class="flex flex-1 flex-col md:flex-row lg:flex-row mx-4">
         <div class="mb-2 border-solid border-gray-300 rounded border shadow-sm w-full">
 
             {{-- Cabeçalho --}}
             <div class="bg-gray-200 px-2 py-3 border-solid border-gray-200 border-b flex-wrap">
-                <img src="@if (isset($livro->imagem))
-                            @if (str_contains($livro->imagem, 'http'))
-                                {{$livro->imagem}}
-                            @else
-                                {{Storage::url($livro->imagem)}}
-                            @endif
-                        @else
-                            {{Storage::url('imgs/sem-livro.png')}}
-                        @endif"
+                <img src="{{Storage::url('imgs/sem-livro.png')}}"
                     alt="Sem foto" class="w-32 h-32 mx-auto rounded border-solid border-2 border-gray-300 hover:border-gray-400"
                 >
                 <div class="tracking-wide font-bold text-lg text-center">
-                    {{ucwords($livro->titulo)}}
+                    Cadastrando um novo livro
                 </div>
             </div>
             {{-- Cabeçalho --}}
@@ -61,7 +52,7 @@
                                     @else
                                         border-gray-200
                                     @endif"
-                                id="titulo" name="titulo" type="text" placeholder="Digite o título" value="{{old('titulo', ucwords($livro->titulo))}}">
+                                id="titulo" name="titulo" type="text" placeholder="Digite o título" value="{{old('titulo')}}">
 
                                 @error('titulo')
                                     <p class="text-red-500 text-xs italic">
@@ -82,7 +73,7 @@
                                 @else
                                     border-gray-200
                                 @endif"
-                                id="autor" name="autor" type="text" placeholder="Digite o nome do autor" value="{{old('autor', $livro->autor)}}">
+                                id="autor" name="autor" type="text" placeholder="Digite o nome do autor" value="{{old('autor')}}">
                             @error('autor')
                                 <p class="text-red-500 text-xs italic">
                                     {{$message}}
@@ -105,7 +96,7 @@
                                     @else
                                         border-gray-200
                                     @endif"
-                                id="assunto" name="assunto" type="text" placeholder="Digite o assunto" value="{{old('assunto', ucwords($livro->assunto))}}">
+                                id="assunto" name="assunto" type="text" placeholder="Digite o assunto" value="{{old('assunto')}}">
 
                                 @error('assunto')
                                     <p class="text-red-500 text-xs italic">
@@ -126,7 +117,7 @@
                                 @else
                                     border-gray-200
                                 @endif"
-                                id="genero" name="genero" type="text" placeholder="Digite o gênero" value="{{old('genero', ucwords($livro->genero))}}">
+                                id="genero" name="genero" type="text" placeholder="Digite o gênero" value="{{old('genero')}}">
                             @error('genero')
                                 <p class="text-red-500 text-xs italic">
                                     {{$message}}
@@ -145,7 +136,7 @@
                                 @else
                                     border-gray-200
                                 @endif"
-                                id="nacionalidade" name="nacionalidade" type="text" placeholder="Digite o nome do autor" value="{{old('nacionalidade', ucwords($livro->nacionalidade))}}">
+                                id="nacionalidade" name="nacionalidade" type="text" placeholder="Digite o nome do autor" value="{{old('nacionalidade')}}">
                             @error('nacionalidade')
                                 <p class="text-red-500 text-xs italic">
                                     {{$message}}
@@ -168,7 +159,7 @@
                                     @else
                                         border-gray-200
                                     @endif"
-                                id="totLivro" name="totLivro" type="number" min="0" placeholder="Digite o total de livros" value="{{old('totLivro', $livro->totLivro)}}">
+                                id="totLivro" name="totLivro" type="number" min="0" placeholder="Digite o total de livros" value="{{old('totLivro')}}">
 
                                 @error('totLivro')
                                     <p class="text-red-500 text-xs italic">
@@ -177,27 +168,6 @@
                                 @enderror
 
                         </div>
-
-                        {{-- emprestimo --}}
-                        {{-- <div class="w-full md:w-1/4 px-3 mb-2 md:mb-1">
-                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-light mb-1" for="emprestimo">
-                                Empréstimos
-                            </label>
-                            <input
-                                class="appearance-none block w-full bg-gray-200 text-grey-darker border rounded py-3 px-3 leading-tight focus:outline-none focus:bg-white-500 focus:border-gray-600
-                                @if ($errors->has('emprestimo'))
-                                    border-red-500
-                                @else
-                                    border-gray-200
-                                @endif"
-                                id="emprestimo" name="emprestimo" type="number" min="0" placeholder="Digite o total de empréstimos" value="{{old('emprestimo', $livro->emprestimo)}}">
-                            @error('emprestimo')
-                                <p class="text-red-500 text-xs italic">
-                                    {{$message}}
-                                </p>
-                            @enderror
-                        </div> --}}
-
                         {{-- numPropria --}}
                         <div class="w-full md:w-1/3 px-3 mb-2 md:mb-1">
                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-light mb-1" for="numPropria">
@@ -210,7 +180,7 @@
                                 @else
                                     border-gray-200
                                 @endif"
-                                id="numPropria" name="numPropria" type="text" placeholder="Digite a numeração" value="{{old('numPropria', $livro->numPropria)}}">
+                                id="numPropria" name="numPropria" type="text" placeholder="Digite a numeração" value="{{old('numPropria')}}">
                             @error('numPropria')
                                 <p class="text-red-500 text-xs italic">
                                     {{$message}}
@@ -229,7 +199,7 @@
                                 @else
                                     border-gray-200
                                 @endif"
-                                id="dataAquisicao" name="dataAquisicao" type="date" placeholder="Digite o nome do autor" value="{{old('dataAquisicao', $livro->dataAquisicao)}}">
+                                id="dataAquisicao" name="dataAquisicao" type="date" placeholder="Digite o nome do autor" value="{{old('dataAquisicao')}}">
                             @error('dataAquisicao')
                                 <p class="text-red-500 text-xs italic">
                                     {{$message}}
@@ -256,25 +226,18 @@
                     </div>
 
                     {{-- Botões --}}
-                    <div class="mt-3 flex justify-between">
-                        <div>
-                            <button type="submit" class='bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-4 rounded'>
-                                Editar
-                            </button>
-                            <a href="{{route('livros.index')}}">
-                                <input type="button" value="Voltar" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer">
-                            </a>
-                        </div>
-                        <div>
-                            <a href="">
-                                <input type="button" value="Excluir" class='bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-4 rounded cursor-pointer' title="Essa ação excluirá o registro do estudante">
-                            </a>
-                        </div>
+                    <div class="mt-3">
+                        <button type="submit" class='bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-4 rounded'>
+                            Cadastrar
+                        </button>
+                        <a href="{{route('livros.index')}}">
+                            <input type="button" value="Voltar" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer">
+                        </a>
                     </div>
             </div>
         </div>
     </div>
-    <!--/Grid form edit livro-->
+    <!--/Grid form create livro-->
 
 </form>
 

@@ -49,10 +49,13 @@
                 {{-- Pesquisar estudante --}}
 
                 {{-- <button data-modal="centeredFormModal" class="bg-green-400 hover:bg-green-600 hover:shadow cursor-pointer rounded text-white p-1 mx-1"> --}}
-                <button data-modal="centeredFormModal" class="modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded" title="Cadastrar estudante">
-                    <i class="fas fa-plus"></i>
-                    {{-- Cadastrar estudante --}}
-                </button>
+                    <a href="{{route('livros.create')}}">
+                        <button data-modal="centeredFormModal" class="modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded" title="Cadastrar livro">
+                            <i class="fas fa-plus"></i>
+                            {{-- Cadastrar livro --}}
+                        </button>
+
+                    </a>
             </div>
         </div>
         <div class="p-3">

@@ -21,8 +21,8 @@
                 Todos os livros
             </div>
             <div class="flex space-x-3">
-                {{-- Pesquisar estudante --}}
-                <form action="" method="get">
+                {{-- Pesquisar --}}
+                <form action="{{route('livros.index')}}" method="get">
                     <div class="w-full flex justify-end items-center relative">
                         <input
                             class="flex appearance-none block w-full bg-white text-grey-darker border rounded py-2 px-2 pr-10 leading-tight focus:outline-none focus:bg-white-500 focus:border-gray-600 border-gray-200"
@@ -34,7 +34,7 @@
                         >
                         @if (isset($aviso) && $aviso == true)
                             {{-- Filtro ativado --}}
-                            <a href="" class="absolute p-2" title="Sair do filtro">
+                            <a href="{{route('livros.index')}}" class="absolute p-2" title="Sair do filtro">
                                 <i class="fas fa-search text-red-500"></i>
                             </a>
                         @else

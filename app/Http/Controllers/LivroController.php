@@ -5,18 +5,41 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LivroStoreRequest;
 use App\Http\Requests\LivroUpdateRequest;
 use App\Models\Livro;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class LivroController extends Controller
 {
-    public function index(Livro $livros)
+    public function index(Livro $livros, Request $request)
     {
         $livros = Livro::orderBy('titulo')->get();
 
+        // Filtro
+        $aviso = false;
+        if ($request->pesquisar != null)
+        {
+            $livros = Livro::query();
+
+            $livros->when($request->pesquisar, function($query, $vl) {
+                $query->where('autor', 'like', '%'. $vl. '%')->orderBy('titulo')
+                    ->orWhere('titulo', 'like', '%'. $vl. '%')->orderBy('titulo')
+                    ->orWhere('assunto', 'like', '%'. $vl. '%')->orderBy('titulo')
+                    ->orWhere('genero', 'like', '%'. $vl. '%')->orderBy('titulo')
+                    ->orWhere('nacionalidade', 'like', '%'. $vl. '%')->orderBy('titulo');
+            });
+
+            $livros = $livros->get();
+
+            $aviso = true;
+        }
+        // Filtro
+
+
         return view('livros.index', [
-            'livros' => $livros
+            'livros' => $livros,
+            'aviso' => $aviso
         ]);
     }
 

@@ -25,7 +25,24 @@ class LivroUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'autor' => 'required|string',
+            'titulo' => 'required|string',
+            // 'slug' => 'nullable',
+            'assunto' => 'required|string',
+            'dataAquisicao' => 'required|date',
+            'totLivro' => 'required|integer',
+            'emprestimo' => 'nullable|integer', // é required na verdade
+            'numPropria' => 'nullable',
+            'imagem' => 'nullable',
+            'genero' => 'nullable',
+            'nacionalidade' => 'nullable',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'required' => 'Este campo é obrigatório',
         ];
     }
 }

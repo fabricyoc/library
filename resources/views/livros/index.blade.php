@@ -78,7 +78,7 @@
                             <td class="border px-4 py-2" title="Total de livros no estoque">{{$livro->totLivro}}
                             <td class="border px-4 py-2" title="Total de livros emprestados">{{$livro->emprestimo}}
                             <td class="border px-4 py-4 sm:space-y-1 sm:space-x-1 text-center">
-                                <a href="" title="Ver" class="bg-teal-300 cursor-pointer rounded-md p-1.5 text-white">
+                                <a href="{{route('livros.show', $livro->id)}}" title="Ver" class="bg-teal-300 cursor-pointer rounded-md p-1.5 text-white">
                                     <i class="fas fa-eye sm:my-2.5"></i>
                                 </a>
                                 <a href="{{route('livros.edit', $livro->id)}}" title="Editar" class="bg-teal-300 cursor-pointer rounded-md p-1.5 text-white">

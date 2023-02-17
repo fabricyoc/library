@@ -266,8 +266,8 @@
                             </a>
                         </div>
                         <div>
-                            <a href="">
-                                <input type="button" value="Excluir" class='bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-4 rounded cursor-pointer' title="Essa ação excluirá o registro do estudante">
+                            <a href="{{route('livros.destroy', $livro->id)}}">
+                                <input type="button" value="Excluir" class='bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-4 rounded cursor-pointer' title="Essa ação excluirá o registro do livro">
                             </a>
                         </div>
                     </div>

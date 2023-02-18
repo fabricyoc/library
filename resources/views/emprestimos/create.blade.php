@@ -11,7 +11,8 @@
                     </span>
                </div>
             </div>
-            <!-- Modal content -->
+
+            <!-- Modal form empréstimo -->
             <form id='form_id' class="w-full" method="post" action="{{route('emprestimos.store')}}">
                 @csrf
 
@@ -75,7 +76,7 @@
 
                 {{-- Botões --}}
                 <div class="mt-3">
-                    <button class='bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-4 rounded'>Emprestar</button>
+                    <button class='bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-4 rounded' id="emprestar">Emprestar</button>
                     <span class='close-modal cursor-pointer bg-red-200 hover:bg-red-500 text-red-900 font-bold py-2 px-4 rounded'>
                         Fechar
                     </span>
@@ -84,3 +85,7 @@
         </div>
     </div>
 </div>
+
+@push('scripts')
+    <script src="{{asset('js/validarEmprestimo.js')}}"></script>
+@endpush

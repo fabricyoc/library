@@ -10,6 +10,7 @@ let mix = require('laravel-mix');
 //   ]);
 
 mix.js("resources/js/app.js", "public/js")
+    .js("resources/js/validarEmprestimo.js", "public/js")
     .js("resources/js/logradouro.js", "public/js") // teste
 
     .postCss("resources/css/all.css", "public/css")

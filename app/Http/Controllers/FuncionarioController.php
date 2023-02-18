@@ -43,14 +43,20 @@ class FuncionarioController extends Controller
         dd('estou no STORE');
     }
 
-    public function show(User $user)
+    public function show(User $user, $id)
     {
-        //
+        $user = User::find($id);
+
+        return view('funcionarios.show', compact('user'));
     }
 
-    public function edit(User $user)
+    public function edit(User $user, $id)
     {
-        //
+        $user = User::find($id);
+
+        // dd($user->load('endereco')->toArray());
+
+        return view('funcionarios.edit', compact('user'));
     }
 
     public function update(UserUpdateRequest $request, User $user)

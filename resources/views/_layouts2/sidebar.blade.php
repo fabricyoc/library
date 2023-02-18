@@ -36,7 +36,7 @@
         </a>
 
         {{-- Funcionários --}}
-        <a href="buttons.html"
+        <a href="{{ route('funcionarios.index') }}"
                class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">
             <li class="w-full h-full py-3 px-2 border-b border-light-border">
                     <i class="fas fa-user float-left mx-2"></i>

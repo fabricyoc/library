@@ -64,7 +64,7 @@
                 @else
                     <thead>
                         <tr>
-                            <th class="border w-1/4 px-4 py-2">Estudante</th>
+                            <th class="border w-1/4 px-4 py-2">Leitor(a)</th>
                             <th class="border w-1/4 px-4 py-2">Livro</th>
                             <th class="border w-1/6 px-4 py-2">Data do empréstimo</th>
                             <th class="border w-1/6 px-4 py-2">Devolução</th>
@@ -80,6 +80,9 @@
                                     <a class="hover:underline hover:underline-offset-4 hover:text-blue-400" href="{{ route('estudantes.show', $el['estudante']->id) }}">
                                         {{ucwords($el['estudante']->name)}}
                                     </a>
+                                    @if ($el['estudante']->type == 'admin')
+                                        <label class="text-red-700 font-bold" title="Funcionário">*</label>
+                                    @endif
                                 </td>
                                 <td class="border px-4 py-2">{{ucwords($el['livro']->titulo)}}</td>
                                 <td class="border px-4 py-2">{{date('d/m/Y', strtotime($el['emprestimo']->created_at))}}</td>

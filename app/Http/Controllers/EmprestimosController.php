@@ -14,7 +14,11 @@ class EmprestimosController extends Controller
 {
     public function index(Request $request)
     {
-        $estudantes = User::where('type', '=', 'common')->orderBy('name')->get();
+        // Apenas estudantes podem pegar livros
+        // $estudantes = User::where('type', '=', 'common')->orderBy('name')->get();
+
+        // Funcionários e estudantes podem pegar livros
+        $estudantes = User::orderBy('name')->get();
 
         // exibirá apenas os livros que estão em estoque
         // $livros = Livro::where('emprestimo', '<', 'totLivro')->orderBy('titulo')->get();

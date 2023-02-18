@@ -112,9 +112,9 @@
                                     <a href="{{route('estudantes.edit', $e->id)}}" title="Editar" class="bg-teal-300 cursor-pointer rounded-md p-1.5 text-white">
                                             <i class="fas fa-edit sm:my-2.5"></i>
                                     </a>
-                                    <a title="Excluir" class="bg-teal-300 cursor-pointer rounded-md p-1.5 text-red-500">
+                                    {{-- <a title="Excluir" class="bg-teal-300 cursor-pointer rounded-md p-1.5 text-red-500">
                                             <i class="fas fa-trash sm:my-2.5"></i>
-                                    </a>
+                                    </a> --}}
                                 </td>
                             </tr>
                         @endforeach

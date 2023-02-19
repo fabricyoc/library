@@ -77,7 +77,7 @@
                 {{-- Botões --}}
                 <div class="mt-3">
                     <button class='bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-4 rounded' id="emprestar">Emprestar</button>
-                    <span class='close-modal cursor-pointer bg-red-200 hover:bg-red-500 text-red-900 font-bold py-2 px-4 rounded'>
+                    <span class='close-modal cursor-pointer bg-red-200 hover:bg-red-500 text-red-900 font-bold py-2 px-4 rounded' id="fechar">
                         Fechar
                     </span>
                 </div>

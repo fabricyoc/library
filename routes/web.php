@@ -27,6 +27,7 @@ Route::prefix('dashboard')->group(function(){
 
     Route::resource('livros', LivroController::class);
     Route::get('livros/{livro}/delete', [LivroController::class, 'destroy'])->name('livros.destroy');
+    Route::get('livros/{livro}/leitores', [LivroController::class, 'readers'])->name('livros.readers');
 });
 
 

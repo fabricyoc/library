@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
             'birthDate' => '1995-10-03',
             'email' => 'fabricyoc@gmail.com',
             'telephone' => '(84)99701-4812',
-            'photo' => 'link para foto',
+            'photo' => fake()->imageUrl(),
             'cpf' => '111.333.444-88',
             'type' => 'admin',
             'password' => '123',

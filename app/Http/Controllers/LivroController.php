@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LivroStoreRequest;
 use App\Http\Requests\LivroUpdateRequest;
 use App\Models\Livro;
+use App\Models\LivroUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -124,5 +126,33 @@ class LivroController extends Controller
         $livro->delete();
 
         return Redirect::route('livros.index');
+    }
+
+    public function readers(Livro $livro)
+    {
+        //
+        // Essa função tem como objetivo retornar todos os leitores que pegaram o livro XYZ
+        //
+
+        // retorna O LIVRO
+        // dd($livro->toArray());
+
+
+        // deu certo
+        // $livros = LivroUser::where('livro_id', '=', $livro->id)->get();
+        // dd($livros->toArray());
+
+
+
+
+
+        $leitores = DB::table('livro_user')
+            ->join('users', 'livro_user.user_id', '=', 'users.id')
+            ->where('livro_user.livro_id', '=', $livro->id)
+            ->orderBy('users.name')->get();
+
+        // dd($leitores->toArray());
+
+        return view('livros.reader', compact('leitores', 'livro'));
     }
 }

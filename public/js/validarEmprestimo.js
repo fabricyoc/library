@@ -26,5 +26,8 @@ function emprestimo() {
 document.querySelector('#emprestar').addEventListener('mouseenter', emprestimo);
 document.querySelector('#estudante').addEventListener('click', emprestimo);
 document.querySelector('#livro').addEventListener('click', emprestimo);
+document.querySelector('#fechar').addEventListener('click', function () {
+  location.reload();
+});
 /******/ })()
 ;

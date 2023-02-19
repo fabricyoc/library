@@ -477,4 +477,9 @@
     <!--/Grid Form Endereço-->
 </form>
 
+@push('scripts')
+    <script src="{{asset('js/user.js')}}"></script>
+    <script src="{{asset('js/checarSenhas.js')}}"></script>
+    <script src="{{asset('js/endereco.js')}}"></script>
+@endpush
 @endsection

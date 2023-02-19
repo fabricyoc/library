@@ -206,5 +206,6 @@
 </div>
 
 @push('scripts')
-    <script src="{{asset('js/logradouro.js')}}"></script>
+    <script src="{{asset('js/user.js')}}"></script>
+    <script src="{{asset('js/endereco.js')}}"></script>
 @endpush

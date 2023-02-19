@@ -1,3 +1,34 @@
+// INÍCIO :: CAMPO APENAS COM NÚMEROS
+const inputNumeroResidencia = document.querySelector('#numero');
+inputNumeroResidencia.addEventListener("keypress", somenteNumeros);
+
+function somenteNumeros(e) {
+
+    var charCode = (e.which) ? e.which : e.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+    e.preventDefault();
+
+}
+// FIM :: CAMPO APENAS COM NÚMEROS
+
+
+
+// INÍCIO :: Máscara para CEP
+if (document.querySelector("#cep")) {
+    const inputCep = document.querySelector("#cep");
+
+    inputCep.addEventListener("keyup", formatarCep);
+
+    function formatarCep(e){
+        var v= e.target.value.replace(/\D/g,"");
+        v=v.replace(/^(\d{5})(\d)/,"$1-$2");
+        e.target.value = v;
+    }
+}
+// FIM :: Máscara para CEP
+
+
+
 // INÍCIO :: Não existe logradouro sem número e vice-versa
 function logradouroNumero() {
     if (document.querySelector('#logradouro').value != "" &&

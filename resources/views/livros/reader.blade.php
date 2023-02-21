@@ -53,7 +53,7 @@
                     <!--Leitores do livro XYZ-->
                         <div class="w-36 my-3 overflow-hidden shadow rounded rounded-t-lg">
                             {{-- <img src="https://i.imgur.com/w1Bdydo.jpg" alt="" class="w-full"> --}}
-                            <div class="w-full bg-gray-500 h-28"></div>
+                            <div class="w-full bg-gray-400 h-28"></div>
 
                             <div class="flex justify-center -mt-8">
                                 <img alt="" class="w-20 h-20 rounded-full border-solid border-white border-2 -mt-3 bg-white"
@@ -70,23 +70,24 @@
                             </div>
 
                             <div class="text-center px-3 pb-6 pt-2">
-                                <h3 class="text-black text-md bold font-sans">{{$leitor->name}}
+                                <h3 class="text-black text-md bold font-sans">
                                     @if ($leitor->type == 'admin')
+                                        <a class="hover:underline hover:underline-offset-4 hover:text-blue-400"
+                                            href="{{ route('funcionarios.show', $leitor->id) }}"
+                                        >
+                                            {{ucwords($leitor->name)}}
+                                        </a>
                                         <label class="text-red-500 font-bold" title="Funcionário">*</label>
+                                    @else
+                                        <a class="hover:underline hover:underline-offset-4 hover:text-blue-400"
+                                            href="{{ route('estudantes.show', $leitor->id) }}"
+                                        >
+                                            {{ucwords($leitor->name)}}
+                                        </a>
                                     @endif
                                 </h3>
                             </div>
 
-                            <div class="flex justify-center pb-3 text-grey-dark">
-                                <div class="text-center mr-3 border-r pr-3">
-                                    <h2>34</h2>
-                                    <span>Photos</span>
-                                </div>
-                                <div class="text-center">
-                                    <h2>42</h2>
-                                    <span>Friends</span>
-                                </div>
-                            </div>
                         </div>
                     <!--Leitores do livro XYZ-->
                 @endforeach

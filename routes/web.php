@@ -5,18 +5,20 @@ use App\Http\Controllers\EmprestimosController;
 use App\Http\Controllers\EstudanteController;
 use App\Http\Controllers\FuncionarioController;
 use App\Http\Controllers\LivroController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 // Apenas para exemplificar
-Route::get('/users', [UserController::class, 'index']);
+// Route::get('/users', [UserController::class, 'index']);
 
-Route::prefix('dashboard')->group(function(){
+Route::middleware(['auth'])->prefix('dashboard')->group(function(){
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
+
     Route::resource('funcionarios', FuncionarioController::class);
 
     Route::resource('estudantes', EstudanteController::class);
@@ -30,4 +32,5 @@ Route::prefix('dashboard')->group(function(){
     Route::get('livros/{livro}/leitores', [LivroController::class, 'readers'])->name('livros.readers');
 });
 
-
+Route::get('/', [LoginController::class, 'index'])->name('login.index');
+Route::post('/', [LoginController::class, 'authenticate'])->name('login.authenticate');

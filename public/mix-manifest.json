@@ -4,6 +4,7 @@
     "/js/endereco.js": "/js/endereco.js",
     "/js/user.js": "/js/user.js",
     "/js/checarSenhas.js": "/js/checarSenhas.js",
+    "/js/auth.js": "/js/auth.js",
     "/css/app.css": "/css/app.css",
     "/css/styles.css": "/css/styles.css",
     "/css/all.css": "/css/all.css"

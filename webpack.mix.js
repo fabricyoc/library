@@ -14,6 +14,7 @@ mix.js("resources/js/app.js", "public/js")
     .js("resources/js/endereco.js", "public/js")
     .js("resources/js/user.js", "public/js")
     .js("resources/js/checarSenhas.js", "public/js")
+    .js("resources/js/auth.js", "public/js")
 
     .postCss("resources/css/all.css", "public/css")
     .postCss("resources/css/styles.css", "public/css")

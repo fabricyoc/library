@@ -21,9 +21,9 @@ class UserSeeder extends Seeder
             'email' => 'fabricyoc@gmail.com',
             'telephone' => '(84)99701-4812',
             'photo' => fake()->imageUrl(),
-            'cpf' => '111.333.444-88',
+            'cpf' => '111.222.333-44',
             'type' => 'admin',
-            'password' => '123',
+            'password' => bcrypt(123),
         ]);
 
         User::factory(9)->create();

@@ -32,5 +32,6 @@ Route::middleware(['auth'])->prefix('dashboard')->group(function(){
     Route::get('livros/{livro}/leitores', [LivroController::class, 'readers'])->name('livros.readers');
 });
 
-Route::get('/', [LoginController::class, 'index'])->name('login.index');
+Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::post('/', [LoginController::class, 'authenticate'])->name('login.authenticate');
+Route::get('/logout', [LoginController::class, 'logout'])->name('login.logout');

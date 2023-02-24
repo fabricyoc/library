@@ -10,7 +10,15 @@ class LoginController extends Controller
 {
     public function index()
     {
-        return view('login.index');
+        if (Auth::check())
+        {
+            // usuário logado
+            return redirect()->route('dashboard.index');
+        }
+        else
+        {
+            return view('login.index');
+        }
     }
 
     public function authenticate(Request $request, User $user)
@@ -31,5 +39,15 @@ class LoginController extends Controller
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/');
     }
 }
